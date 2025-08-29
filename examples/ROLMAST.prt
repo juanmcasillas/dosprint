@@ -1,0 +1,2952 @@
+%!PS-Adobe
+/wpdict	120 dict def
+wpdict	begin
+/bdef	{bind def} bind def
+
+/bflg	false def
+/Bfont	0 def
+/bon	false def
+
+/psz	0 def
+/_S	/show load def
+/_t	{0 rmoveto} bdef
+
+/_pixelsnap
+	{transform .25 sub round .25 add
+	 exch .25 sub round .25 add exch itransform
+	} bdef
+/_pixeldsnap
+	{ dtransform round exch round exch idtransform } bdef
+
+/_lt	{_pixelsnap lineto} bdef
+/_rlt	{_pixeldsnap rlineto} bdef
+/_mt	{_pixelsnap moveto} bdef
+/_rmt	{_pixeldsnap rmoveto} bdef
+
+/bshow	{gsave psz 30 div 0 _rmt dup show grestore show} bdef
+
+/DUx	0 def
+/DUy	0 def
+/hscl	0 def
+
+/M	{_mt
+	 2 mul -2 2
+	 { -2 roll 0 _rmt _S } for
+	} bdef
+
+/makeoutl
+	{ dup /OutlineFlag known not
+	  { dup dup length 2 add dict begin
+	    {1 index /FID ne { def }{ pop pop } ifelse } forall
+	    /UniqueID known {/UniqueID UniqueID 10000 add def} if
+	    /PaintType PaintType 0 eq { 2 }{ PaintType } ifelse def
+	    /StrokeWidth 15 def
+	    /OutlineFlag true def
+	    /OutlineFont currentdict end definefont
+	  } if
+	} bdef
+
+/nbuff	50 string def
+/orntsv	0 def
+/plen	0 def
+/pwid	0 def
+/picstr	1 string def
+
+/WPencoding StandardEncoding 256 array copy def 0
+ [ 127/Aacute/Acircumflex/Adieresis/Agrave/Aring/Atilde/Ccedilla
+  /Delta/Eacute/Ecircumflex/Edieresis/Egrave/Eth/Gamma/Iacute
+  /Icircumflex/Idieresis/Igrave/Lambda/Ntilde/Oacute
+  /Ocircumflex/Odieresis/Ograve/Omega/Otilde/Phi/Pi/Psi
+  /Scaron/Sigma/TeXtext32/Theta/Thorn
+  209/Uacute/Ucircumflex/Udieresis/Ugrave/Upsilon/Xi/Yacute
+  /Ydieresis/Zcaron/aacute/acircumflex/adieresis/agrave
+  /aring/atilde/brokenbar
+  228/ccedilla/copyright/degree/divide
+  236/dotlessj/eacute/ecircumflex/edieresis/egrave
+  242/eth/ff/ffi
+  246/ffl/iacute
+  252/icircumflex/idieresis/igrave/logicalnot
+  1/minus/mu/multiply/ntilde/oacute/ocircumflex/odieresis
+  /ograve/onehalf/onequarter/onesuperior/otilde/plusminus
+  /registered/scaron/thorn/threequarters/threesuperior
+  /trademark/twosuperior/uacute/ucircumflex/udieresis
+  /ugrave/yacute/ydieresis/zcaron
+]
+{ dup type /nametype eq
+  { WPencoding 2 index 2 index put pop 1 add }
+  { exch pop } ifelse
+} forall pop
+
+/reencode
+{ dup FontDirectory exch known
+   { findfont }
+   {  dup nbuff cvs dup length 1 sub get 82 eq
+   {dup nbuff cvs dup length 1 sub 0 exch getinterval
+   findfont begin
+   currentdict dup length dict begin
+{ 1 index /FID ne {def} {pop pop} ifelse } forall
+/FontName exch def
+
+/Encoding WPencoding def
+currentdict dup end end
+/FontName get exch definefont
+     }
+     { findfont } ifelse
+  } ifelse
+} bdef
+
+/WPDLencoding StandardEncoding 256 array copy def 0
+[ 127     /SA420000/SD630000/SF010000/SF020000/SF030000
+/SF040000/SF050000/SF060000/SF070000/SF080000/SF090000
+/SF100000/SF110000/SF140000/SF150000/SF160000/SF190000
+/SF200000/SF210000/SF220000/SF230000/SF240000/SF250000/SF260000
+/SF270000/SF280000/SF360000/SF370000/SF380000/SF390000/SF400000
+/SF410000/SF420000/SF430000
+209 /SF440000/SF450000/SF460000/SF470000/SF480000
+/SF490000/SF500000/SF510000/SF520000/SF530000/SF540000
+/SF570000/SF580000/SF590000/SF600000/SF610000
+228 /SM570001/SM590000/SM600000/SM630000
+236 /SM680000/SM690000/SM700000/SM750000/SM750002
+242 /SM770000/SM790000/SP320000
+246 /SS000000/SS010000
+252 /SS260000/SS270000/SV040000/apostrophereverse
+1/arrowboth/arrowdown/arrowleft/arrowright/arrowup/club
+/deutschmark/diamond/diamondopen/exclamdbl/female
+/fiveeighths/franc/heart/male/musicalnote/musicalnotedbl
+/napostrophe/nsuperior/oneeighths/seveneighths/spade
+/threeeights/underscoredbl/SM760000
+]
+{ dup type /nametype eq
+  { WPDLencoding 2 index 2 index put pop 1 add }
+  { exch pop } ifelse
+} forall pop
+
+/reencodeL
+    { dup FontDirectory exch known
+      { findfont }
+      {  dup nbuff cvs dup length 1 sub get 76 eq
+         {    dup nbuff cvs dup length 1 sub 0 exch getinterval
+         findfont begin
+         currentdict dup length dict begin
+         { 1 index /FID ne {def} {pop pop} ifelse } forall
+         /FontName exch def
+         /Encoding WPDLencoding def
+         currentdict dup end end
+         /FontName get exch definefont
+         }
+         { findfont } ifelse
+      } ifelse
+    } bdef
+
+/ron	false def
+/sflg	false def
+/slan	0 def
+/sp	32 def
+
+/sshow
+	{ save exch
+	   gsave
+	    psz 20 div dup neg _rmt dup show
+	   grestore
+	   dup
+	   save exch
+	    Bfont setfont
+	    1 setgray show
+	   restore
+	   currentfont makeoutl setfont show
+	   currentpoint 3 -1 roll
+	  restore _mt
+	} bdef
+
+/Sx	0 def
+/Sy	0 def
+/Ux	0 def
+/Uy	0 def
+/W	/widthshow load def
+
+/_B	{/bflg true def
+	 sflg not {/_S /bshow load def /bon true def} if
+	} bdef
+/_b	{/bflg false def
+	 bon {/_S /show load def /bon false def} if
+	} bdef
+/_bd	{save} bdef
+/_bp	{save 2 setmiterlimit .06 .06 scale 0 0 _mt} bdef
+/_ccprocs
+	{/proc2 exch cvlit def
+	 /proc1 exch cvlit def
+	 /newproc proc1 length proc2 length add
+	 array def
+	 newproc 0 proc1 putinterval
+	 newproc proc1 length proc2 putinterval
+	 newproc cvx
+	} def
+/_clr	{3 {255 div 3 1 roll} repeat
+	 ron {6 3 roll pop pop pop} {setrgbcolor} ifelse
+	} bdef
+/_cp	/closepath load def
+/_cw	{stroke initclip _mt 0 2 index
+	 _rlt 0 _rlt 0 exch neg
+	 _rlt clip newpath
+	} bdef
+/_d	/setdash load def
+/_DU	{currentpoint /DUy exch def /DUx exch def} bdef
+/_du	{gsave
+	  save
+	  8 setlinewidth
+      currentpoint -30 add _mt
+      DUx DUy -30 add _lt stroke
+	  restore
+	  8 setlinewidth
+	  currentpoint -50 add _mt
+	  DUx DUy -50 add _lt stroke
+	 grestore
+	} bdef
+/_ed	{restore} bdef
+/_ep	{restore showpage 0 0 _mt} bdef
+/_f	/eofill load def
+/_ff	{ exch reencode exch
+	  3 div dup /psz exch def
+	  scalefont dup /Bfont exch def setfont
+	} bdef
+/_ffs	{ /slan exch 10 div def /hscl exch 1000 div def
+	  /psz exch 3 div def
+	  [ psz hscl mul 0 slan dup sin exch cos div psz mul psz 0 0 ]
+	  exch reencode exch makefont dup /Bfont exch def setfont
+	} bdef
+/_g	/setgray load def
+/_gs	{neg 100 add 100 div setgray} bdef
+/_i	{gsave
+	  dup /picstr exch 7 add 8 idiv string def
+	  3 1 roll translate dup 1 scale
+	  dup 1 1 [5 -1 roll 0 0 1 0 0]
+	  {currentfile picstr readhexstring pop} image
+         grestore
+        } bdef
+/_is	{save 4 1 roll
+	  dup /picstr exch 7 add 8 idiv string def
+	  3 1 roll translate dup 1 scale
+	  dup 1 1 [5 -1 roll 0 0 1 0 0]
+	  {currentfile picstr readhexstring pop} image
+	 restore
+	} bdef
+/_ie	{1 eq { {1 exch sub} currenttransfer _ccprocs settransfer} if
+	 /_isx exch def /_isy exch def
+	 _isx mul exch _isy mul translate
+	 add 2 div /_txc exch def
+	 add 2 div /_tyc exch def
+	 _txc _isx mul _tyc _isy mul translate
+	 360 exch sub rotate
+	 1 eq { _isx neg _isy scale }
+	 { _isx _isy scale }
+	 ifelse _txc neg _tyc neg translate
+	} bdef
+/_irms	{save
+	  12 1 roll
+	  1 eq {{1 exch sub} currenttransfer _ccprocs settransfer} if
+	  /picstr exch string def translate
+	  2 index 6 index sub 2 div 2 index 6 index sub 2 div neg
+	  translate
+	  5 index 5 index 2 div neg exch 2 div exch
+	  2 copy neg exch neg exch 5 2 roll translate
+	  360 exch sub rotate
+	  3 index 3 index 7 index div exch 8 index div exch scale
+	  translate pop pop 2 index 2 index scale
+	  3 index 0 eq
+	  { [ 3 index 0 0 5 index neg 0 0 ] }
+	  { 3 index 1 eq
+      { [ 3 index 0 0 5 index 0 7 index ] }
+      { 3 index 128 eq
+	  { [ 3 index neg 0 0 5 index neg 7 index 0 ] }
+	  { [ 3 index neg 0 0 5 index 7 index 7 index ] } ifelse
+	    } ifelse
+	  } ifelse
+          {currentfile picstr readhexstring pop} image
+          pop
+	 restore
+	} bdef
+
+/_l	{_lt} bdef
+/_lr	{_rlt} bdef
+/_m	{_mt} bdef
+/_O	{currentfont makeoutl setfont} bdef
+/_o	{Bfont setfont} bdef
+/_ornt	{/pwid exch def /plen exch def
+	 orntsv 1 eq {0 pwid translate -90 rotate} if
+	 orntsv 2 eq {pwid plen translate 180 rotate} if
+	 orntsv 3 eq {plen 0 translate 90 rotate} if
+	 dup 1 eq {pwid 0 translate 90 rotate} if
+	 dup 2 eq {pwid plen translate 180 rotate} if
+	 dup 3 eq {0 plen translate -90 rotate} if
+	 /orntsv exch def
+	} bdef
+/_lod1	{currentpoint orntsv plen pwid 6 -1 roll restore save} bdef
+/_lod2	{_bp 7 2 roll _ornt _mt} bdef
+/_unlod	{currentpoint orntsv plen pwid 7 -2 roll restore restore
+	 _bp 6 1 roll _ornt _mt
+	} bdef
+/_p	{2 copy _mt 1 0 _rlt _mt} bdef
+/_pl	{{_lt} repeat} bdef
+/_R      { /ron true def /_S /_rshow load def /_t /_red load def} bdef
+/_rshow	 { save exch
+	   currentpoint
+	   /RSy exch def /RSx exch def
+	   ron {
+		 sflg
+		 {	currentpoint
+			/Ry exch def /Rx exch def
+			dup stringwidth pop Rx Ry psz 4 div add _mt
+			Rx psz 15 add setlinewidth .95 setgray 0 setlinecap
+			add Ry psz 4 div add _lt stroke Rx Ry _mt 0 0 0 setrgbcolor
+			dup show Rx Ry _mt
+			sshow
+		 }
+		 { _redshow
+		 }ifelse
+	   }
+	   {	 sflg {sshow} if
+	   }ifelse
+	   currentpoint 3 -1 roll
+	   restore _mt
+	 } bdef
+/_red	{ gsave dup
+         currentpoint /Ry exch def /Rx exch def
+         Rx Ry psz 4 div add _mt
+         Rx psz 15 add setlinewidth .95 setgray 0 setlinecap
+         add Ry psz 4 div add _lt stroke
+         Rx Ry _mt
+         grestore
+         0 rmoveto
+    }bdef
+/_redshow {currentpoint
+         /Ry exch def /Rx exch def
+         dup stringwidth pop Rx Ry psz 4 div add _mt
+         Rx psz 15 add setlinewidth .95 setgray 0 setlinecap
+         add Ry psz 4 div add _lt stroke Rx Ry _mt 0 0 0 setrgbcolor
+         show currentpoint _mt
+    }bdef
+/_rmxy	{_rmt} bdef
+/_s	/stroke load def
+/_SH	bon {/bon false def} if
+	{/sflg true def /_S /_rshow load def
+	} bdef
+/_sh	{ ron 	{/sflg false def bflg {_B} if}
+		{/_S /show load def /sflg false def bflg {_B} if}ifelse
+	}bdef
+/_sp	{ gsave stroke grestore } bdef
+/_ST     {currentpoint /Sy exch def /Sx exch def} bdef
+/_st     {gsave
+          currentpoint
+          psz 4 div add _mt
+          Sx Sy psz 4 div add _lt
+          10 setlinewidth
+          stroke
+          grestore
+          } bdef
+/_U	{currentpoint /Uy exch def /Ux exch def} bdef
+/_u	{gsave
+	  currentpoint
+	  -30 add _mt
+	  Ux Uy -30 add _lt
+	  12 setlinewidth
+	  stroke
+	 grestore
+	} bdef
+/_w	/setlinewidth load def
+end
+/#copies 1 def /wpdict2 100 dict def
+wpdict begin wpdict2 begin
+_bd
+/_rhs{readhexstring}bdef
+/_tr{translate}bdef
+/_ix{index}bdef
+/_mx{matrix}bdef
+/ife{ifelse}bdef
+/_x{exch}bdef
+
+/_is{save 4 1 roll
+dup/picstr _x 7 add 8 idiv string def
+3 1 roll _tr dup 1 scale
+dup 1 1[5 -1 roll 0 0 1 0 0]
+{currentfile picstr _rhs pop}image restore}bdef
+/_epsi{1 eq{{1 _x sub}currenttransfer _ccprocs settransfer}if
+/yp _x def/xp _x def
+/dhgt _x def/dwid _x def
+4 copy sub/swid _x def
+sub/shgt _x def
+add 2 div/icx _x def add 2 div/icy _x def
+xp dwid 2 div add icx sub yp dhgt 2 div sub
+icy sub _tr icx icy _tr
+360 _x sub rotate
+dwid swid div/xsc _x def _x
+dhgt shgt div/ysc _x def _x
+dup 1 eq{xsc neg/xsc _x def pop}
+{dup 2 eq{ysc neg /ysc _x def pop}
+{3 eq{ysc neg/ysc _x def xsc neg/xsc _x def}
+{}ife}ife}ife
+xsc ysc scale
+100 div _x 100 div _x scale
+icx neg icy neg _tr}bdef
+/_doRGB{3{255 div 3 1 roll}repeat setrgbcolor}bdef
+/_doCMYK{4{255 div 4 1 roll}repeat
+neg 1 add setcmykcolor}bdef
+/_RGBorCMYK{3 copy eq{2 _ix eq
+{pop pop 0 0 0 4 3 roll _doCMYK}
+{_doRGB}ife}{pop _doRGB}ife}bdef
+/_c{/setcmykcolor where{pop _RGBorCMYK}{_doRGB}ife}bdef
+/_clr{ron{6 3 roll pop pop pop}{_c}ife}bdef
+/_r{/ron false def _c}bdef/_rm{0 _rmt}bdef
+/_ircms{save
+12 1 roll
+1 eq{{1 _x sub}currenttransfer _ccprocs settransfer}if
+/picstr _x string def _tr
+2 _ix 6 _ix sub 2 div 2 _ix 6 _ix sub 2 div neg
+_tr 5 _ix 5 _ix 2 div neg _x 2 div _x
+2 copy neg _x neg _x 5 2 roll _tr
+360 _x sub rotate
+3 _ix 3 _ix 7 _ix div _x 8 _ix div _x scale
+_tr pop pop 2 _ix 2 _ix scale
+3 _ix 0 eq{[3 _ix 0 0 5 _ix neg 0 0]}{3 _ix 1 eq
+{[3 _ix 0 0 5 _ix 0 7 _ix]}{3 _ix 128 eq
+{[3 _ix neg 0 0 5 _ix neg 7 _ix 0]}
+{[3 _ix neg 0 0 5 _ix 7 _ix 7 _ix]}ife}ife}ife
+{currentfile picstr _rhs pop}false 3 colorimage
+pop restore}bdef
+/_bp{save 2 setlinecap 2 setmiterlimit 
+.06 .06 scale 0 0 moveto}bdef
+/tctm _mx def/trot _mx def
+/tscale _mx def/rmtx _mx def
+/fr{72 0 rmtx defaultmatrix dtransform
+ /yres _x def/xres _x def
+ xres dup mul yres dup mul add sqrt}bdef
+/sus{/spotf _x def/sang _x def/csz _x def
+/m tctm currentmatrix def/rm sang trot rotate def
+/sm csz dup tscale scale def
+sm rm m m concatmatrix m concatmatrix pop
+1 0 m dtransform /y1 _x def/x1 _x def
+/veclength x1 dup mul y1 dup mul add sqrt def
+/frcy fr veclength div def /nsang y1 x1 atan def
+frcy nsang/spotf load setscreen}bdef
+/bitis{/ybit _x def /xbit _x def
+/bval bstring ybit bwidth mul xbit 8 idiv add get def
+/mask 1 7 xbit 8 mod sub bitshift def
+bval mask and 0 ne}bdef
+/bps{/y _x def /x _x def
+/xndx x 1 add 2 div bpside mul cvi def
+/yndx y 1 add 2 div bpside mul cvi def
+xndx yndx bitis
+{/onb onb 1 add def 1}{/ofb ofb 1 add def 0}ife}bdef
+/stpatt{/csz _x def /angle _x def /bwidth _x def
+/bpside _x def /bstring _x def
+/onb 0 def /ofb 0 def
+csz angle /bps load
+sus{}settransfer
+ofb ofb onb add div _g}bdef
+/_fp{8 1 0 72 fr 32 div div stpatt}bdef
+/_pf{gsave eofill grestore}bdef
+/_np{newpath}bdef/_lc{setlinecap}bdef
+ <</Policies  <</PageSize 2 >> >> setpagedevice currentpagedevice /InputAttributes get 0 get dup null eq {pop}{ dup   /InputAttributes   1 dict dup /Priority [0] put   put  setpagedevice  } ifelse << /PageSize [595 842] >> setpagedevice _bp 0 14032 9922 _ornt /CourierR 400 _ff
+0 14032 9922 _ornt 
+/_r      { sflg {/_t {0 rmoveto}bdef /ron false def}
+         { /_S /show load def /_t {0 rmoveto}bdef /ron false def}ifelse
+     }bdef
+gsave 1.5 3 scale gsave 0 0 0 _c _s 366 4499 _m
+_sp 347 4481 347 4499 2 _pl _s 334 4481 _m
+_sp 366 4506 334 4506 2 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 368 4506 _m
+_sp 420 4506 1 _pl _s 368 4499 _m
+_sp 420 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 421 4506 _m
+_sp 473 4506 1 _pl _s 421 4499 _m
+_sp 473 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 474 4506 _m
+_sp 526 4506 1 _pl _s 474 4499 _m
+_sp 526 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 528 4506 _m
+_sp 580 4506 1 _pl _s 528 4499 _m
+_sp 580 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 581 4506 _m
+_sp 633 4506 1 _pl _s 581 4499 _m
+_sp 633 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 634 4506 _m
+_sp 686 4506 1 _pl _s 634 4499 _m
+_sp 686 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 688 4506 _m
+_sp 740 4506 1 _pl _s 688 4499 _m
+_sp 740 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 741 4506 _m
+_sp 793 4506 1 _pl _s 741 4499 _m
+_sp 793 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 794 4506 _m
+_sp 846 4506 1 _pl _s 794 4499 _m
+_sp 846 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 848 4506 _m
+_sp 900 4506 1 _pl _s 848 4499 _m
+_sp 900 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 901 4506 _m
+_sp 953 4506 1 _pl _s 901 4499 _m
+_sp 953 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 954 4506 _m
+_sp 1006 4506 1 _pl _s 954 4499 _m
+_sp 1006 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1008 4506 _m
+_sp 1060 4506 1 _pl _s 1008 4499 _m
+_sp 1060 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1061 4506 _m
+_sp 1113 4506 1 _pl _s 1061 4499 _m
+_sp 1113 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1114 4506 _m
+_sp 1166 4506 1 _pl _s 1114 4499 _m
+_sp 1166 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1168 4506 _m
+_sp 1220 4506 1 _pl _s 1168 4499 _m
+_sp 1220 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1221 4506 _m
+_sp 1273 4506 1 _pl _s 1221 4499 _m
+_sp 1273 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1274 4506 _m
+_sp 1326 4506 1 _pl _s 1274 4499 _m
+_sp 1326 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1328 4506 _m
+_sp 1380 4506 1 _pl _s 1328 4499 _m
+_sp 1380 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1381 4506 _m
+_sp 1433 4506 1 _pl _s 1381 4499 _m
+_sp 1433 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1434 4506 _m
+_sp 1486 4506 1 _pl _s 1434 4499 _m
+_sp 1486 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1488 4506 _m
+_sp 1540 4506 1 _pl _s 1488 4499 _m
+_sp 1540 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1541 4506 _m
+_sp 1593 4506 1 _pl _s 1541 4499 _m
+_sp 1593 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1594 4506 _m
+_sp 1646 4506 1 _pl _s 1594 4499 _m
+_sp 1646 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1648 4506 _m
+_sp 1700 4506 1 _pl _s 1648 4499 _m
+_sp 1700 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1701 4506 _m
+_sp 1753 4506 1 _pl _s 1701 4499 _m
+_sp 1753 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1754 4506 _m
+_sp 1806 4506 1 _pl _s 1754 4499 _m
+_sp 1806 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1808 4506 _m
+_sp 1860 4506 1 _pl _s 1808 4499 _m
+_sp 1860 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1861 4506 _m
+_sp 1913 4506 1 _pl _s 1861 4499 _m
+_sp 1913 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1940 4481 _m
+_sp 1940 4499 1 _pl _s 1966 4506 _m
+_sp 1914 4506 1 _pl _s 1966 4499 _m
+_sp 1914 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1968 4506 _m
+_sp 2020 4506 1 _pl _s 1968 4499 _m
+_sp 2020 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2021 4506 _m
+_sp 2073 4506 1 _pl _s 2021 4499 _m
+_sp 2073 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2074 4506 _m
+_sp 2126 4506 1 _pl _s 2074 4499 _m
+_sp 2126 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2128 4506 _m
+_sp 2180 4506 1 _pl _s 2128 4499 _m
+_sp 2180 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2181 4506 _m
+_sp 2233 4506 1 _pl _s 2181 4499 _m
+_sp 2233 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2234 4506 _m
+_sp 2286 4506 1 _pl _s 2234 4499 _m
+_sp 2286 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2288 4506 _m
+_sp 2340 4506 1 _pl _s 2288 4499 _m
+_sp 2340 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2341 4506 _m
+_sp 2393 4506 1 _pl _s 2341 4499 _m
+_sp 2393 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2394 4506 _m
+_sp 2446 4506 1 _pl _s 2394 4499 _m
+_sp 2446 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2448 4506 _m
+_sp 2500 4506 1 _pl _s 2448 4499 _m
+_sp 2500 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2501 4506 _m
+_sp 2553 4506 1 _pl _s 2501 4499 _m
+_sp 2553 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2554 4506 _m
+_sp 2606 4506 1 _pl _s 2554 4499 _m
+_sp 2606 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2608 4506 _m
+_sp 2660 4506 1 _pl _s 2608 4499 _m
+_sp 2660 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2661 4506 _m
+_sp 2713 4506 1 _pl _s 2661 4499 _m
+_sp 2713 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2714 4506 _m
+_sp 2766 4506 1 _pl _s 2714 4499 _m
+_sp 2766 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2768 4506 _m
+_sp 2820 4506 1 _pl _s 2768 4499 _m
+_sp 2820 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2821 4506 _m
+_sp 2873 4506 1 _pl _s 2821 4499 _m
+_sp 2873 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2874 4506 _m
+_sp 2926 4506 1 _pl _s 2874 4499 _m
+_sp 2926 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2928 4506 _m
+_sp 2980 4506 1 _pl _s 2928 4499 _m
+_sp 2980 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2981 4506 _m
+_sp 3033 4506 1 _pl _s 2981 4499 _m
+_sp 3033 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3034 4506 _m
+_sp 3086 4506 1 _pl _s 3034 4499 _m
+_sp 3086 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3088 4506 _m
+_sp 3140 4506 1 _pl _s 3088 4499 _m
+_sp 3140 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3141 4506 _m
+_sp 3193 4506 1 _pl _s 3141 4499 _m
+_sp 3193 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3194 4506 _m
+_sp 3246 4506 1 _pl _s 3194 4499 _m
+_sp 3246 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3248 4506 _m
+_sp 3300 4506 1 _pl _s 3248 4499 _m
+_sp 3300 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3301 4506 _m
+_sp 3353 4506 1 _pl _s 3301 4499 _m
+_sp 3353 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3354 4506 _m
+_sp 3406 4506 1 _pl _s 3354 4499 _m
+_sp 3406 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3408 4506 _m
+_sp 3460 4506 1 _pl _s 3408 4499 _m
+_sp 3460 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3461 4506 _m
+_sp 3513 4506 1 _pl _s 3461 4499 _m
+_sp 3513 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3514 4506 _m
+_sp 3566 4506 1 _pl _s 3514 4499 _m
+_sp 3566 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3568 4506 _m
+_sp 3620 4506 1 _pl _s 3568 4499 _m
+_sp 3620 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 4481 _m
+_sp 3647 4499 1 _pl _s 3673 4506 _m
+_sp 3621 4506 1 _pl _s 3673 4499 _m
+_sp 3621 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3674 4506 _m
+_sp 3726 4506 1 _pl _s 3674 4499 _m
+_sp 3726 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3728 4506 _m
+_sp 3780 4506 1 _pl _s 3728 4499 _m
+_sp 3780 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3781 4506 _m
+_sp 3833 4506 1 _pl _s 3781 4499 _m
+_sp 3833 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3834 4506 _m
+_sp 3886 4506 1 _pl _s 3834 4499 _m
+_sp 3886 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3888 4506 _m
+_sp 3940 4506 1 _pl _s 3888 4499 _m
+_sp 3940 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3941 4506 _m
+_sp 3993 4506 1 _pl _s 3941 4499 _m
+_sp 3993 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3994 4506 _m
+_sp 4046 4506 1 _pl _s 3994 4499 _m
+_sp 4046 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4048 4506 _m
+_sp 4100 4506 1 _pl _s 4048 4499 _m
+_sp 4100 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4101 4506 _m
+_sp 4153 4506 1 _pl _s 4101 4499 _m
+_sp 4153 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4154 4506 _m
+_sp 4206 4506 1 _pl _s 4154 4499 _m
+_sp 4206 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4208 4506 _m
+_sp 4260 4506 1 _pl _s 4208 4499 _m
+_sp 4260 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4261 4506 _m
+_sp 4313 4506 1 _pl _s 4261 4499 _m
+_sp 4313 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4314 4506 _m
+_sp 4366 4506 1 _pl _s 4314 4499 _m
+_sp 4366 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4368 4506 _m
+_sp 4420 4506 1 _pl _s 4368 4499 _m
+_sp 4420 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4421 4506 _m
+_sp 4473 4506 1 _pl _s 4421 4499 _m
+_sp 4473 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4474 4506 _m
+_sp 4526 4506 1 _pl _s 4474 4499 _m
+_sp 4526 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4528 4506 _m
+_sp 4580 4506 1 _pl _s 4528 4499 _m
+_sp 4580 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4581 4506 _m
+_sp 4633 4506 1 _pl _s 4581 4499 _m
+_sp 4633 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4634 4506 _m
+_sp 4686 4506 1 _pl _s 4634 4499 _m
+_sp 4686 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4688 4506 _m
+_sp 4740 4506 1 _pl _s 4688 4499 _m
+_sp 4740 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4741 4506 _m
+_sp 4793 4506 1 _pl _s 4741 4499 _m
+_sp 4793 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4794 4506 _m
+_sp 4846 4506 1 _pl _s 4794 4499 _m
+_sp 4846 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4848 4506 _m
+_sp 4900 4506 1 _pl _s 4848 4499 _m
+_sp 4900 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4901 4506 _m
+_sp 4953 4506 1 _pl _s 4901 4499 _m
+_sp 4953 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4954 4506 _m
+_sp 5006 4506 1 _pl _s 4954 4499 _m
+_sp 5006 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5008 4506 _m
+_sp 5060 4506 1 _pl _s 5008 4499 _m
+_sp 5060 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5061 4506 _m
+_sp 5113 4506 1 _pl _s 5061 4499 _m
+_sp 5113 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5114 4506 _m
+_sp 5166 4506 1 _pl _s 5114 4499 _m
+_sp 5166 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5168 4506 _m
+_sp 5220 4506 1 _pl _s 5168 4499 _m
+_sp 5220 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5221 4506 _m
+_sp 5273 4506 1 _pl _s 5221 4499 _m
+_sp 5273 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5274 4506 _m
+_sp 5326 4506 1 _pl _s 5274 4499 _m
+_sp 5326 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5328 4506 _m
+_sp 5380 4506 1 _pl _s 5328 4499 _m
+_sp 5380 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5381 4506 _m
+_sp 5433 4506 1 _pl _s 5381 4499 _m
+_sp 5433 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5434 4506 _m
+_sp 5486 4506 1 _pl _s 5434 4499 _m
+_sp 5486 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5488 4506 _m
+_sp 5540 4506 1 _pl _s 5488 4499 _m
+_sp 5540 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5541 4506 _m
+_sp 5593 4506 1 _pl _s 5541 4499 _m
+_sp 5593 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5594 4506 _m
+_sp 5646 4506 1 _pl _s 5594 4499 _m
+_sp 5646 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5648 4506 _m
+_sp 5700 4506 1 _pl _s 5648 4499 _m
+_sp 5700 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5701 4506 _m
+_sp 5753 4506 1 _pl _s 5701 4499 _m
+_sp 5753 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5754 4506 _m
+_sp 5806 4506 1 _pl _s 5754 4499 _m
+_sp 5806 4499 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5808 4499 _m
+_sp 5828 4481 5828 4499 2 _pl _s 5841 4481 _m
+_sp 5808 4506 5841 4506 2 _pl _s grestore _s grestore 472 13469 _m
+552 13469 _m
+632 13469 _m
+712 13469 _m
+792 13469 _m
+872 13469 _m
+952 13469 _m
+1032 13469 _m
+1112 13469 _m
+1192 13469 _m
+1272 13469 _m
+1352 13469 _m
+1432 13469 _m
+1512 13469 _m
+1592 13469 _m
+1672 13469 _m
+1752 13469 _m
+1832 13469 _m
+1912 13469 _m
+1992 13469 _m
+2072 13469 _m
+2152 13469 _m
+2232 13469 _m
+2312 13469 _m
+2392 13469 _m
+2472 13469 _m
+2552 13469 _m
+2632 13469 _m
+2712 13469 _m
+2792 13469 _m
+2872 13469 _m
+2952 13469 _m
+3032 13469 _m
+3112 13469 _m
+3192 13469 _m
+3272 13469 _m
+3352 13469 _m
+3432 13469 _m
+3512 13469 _m
+3592 13469 _m
+3672 13469 _m
+3752 13469 _m
+3832 13469 _m
+3912 13469 _m
+3992 13469 _m
+4072 13469 _m
+4152 13469 _m
+4232 13469 _m
+4312 13469 _m
+4392 13469 _m
+4472 13469 _m
+4552 13469 _m
+4632 13469 _m
+4712 13469 _m
+4792 13469 _m
+4872 13469 _m
+4952 13469 _m
+5032 13469 _m
+5112 13469 _m
+5192 13469 _m
+5272 13469 _m
+5352 13469 _m
+5432 13469 _m
+5512 13469 _m
+5592 13469 _m
+5672 13469 _m
+5752 13469 _m
+5832 13469 _m
+5912 13469 _m
+5992 13469 _m
+6072 13469 _m
+6152 13469 _m
+6232 13469 _m
+6312 13469 _m
+6392 13469 _m
+6472 13469 _m
+6552 13469 _m
+6632 13469 _m
+6712 13469 _m
+6792 13469 _m
+6872 13469 _m
+6952 13469 _m
+7032 13469 _m
+7112 13469 _m
+7192 13469 _m
+7272 13469 _m
+7352 13469 _m
+7432 13469 _m
+7512 13469 _m
+7592 13469 _m
+7672 13469 _m
+7752 13469 _m
+7832 13469 _m
+7912 13469 _m
+7992 13469 _m
+8072 13469 _m
+8152 13469 _m
+8232 13469 _m
+8312 13469 _m
+8392 13469 _m
+8472 13469 _m
+8552 13469 _m
+8632 13469 _m
+8712 13469 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 4437 _m
+_sp 334 4480 1 _pl _s 347 4437 _m
+_sp 347 4480 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1940 4437 _m
+_sp 1940 4480 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 4437 _m
+_sp 3647 4480 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 4437 _m
+_sp 5828 4480 1 _pl _s 5841 4437 _m
+_sp 5841 4480 1 _pl _s grestore _s grestore 472 13336 _m
+552 13336 _m
+80 _t(Name:______________________)_S 80 _t2872 13336 _m
+2952 13336 _m
+240 _t(LANGUAGE)_S 720 _t(RANK)_S 560 _t5432 13336 _m
+5512 13336 _m
+240 _t(SPELL)_S 80 _t(LIST)_S 400 _t(L.)_S 80 _t(Known)_S 160 _t(C.)_S 80 _t(Learning)_S 80 _t8712 13336 _m
+8792 13336 _m
+560 _tgsave 1.5 3 scale gsave 0 0 0 _c _s 334 4393 _m
+_sp 334 4436 1 _pl _s 347 4393 _m
+_sp 347 4436 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1940 4393 _m
+_sp 1940 4436 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 4393 _m
+_sp 3647 4436 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 4393 _m
+_sp 5828 4436 1 _pl _s 5841 4393 _m
+_sp 5841 4436 1 _pl _s grestore _s grestore 472 13203 _m
+552 13203 _m
+80 _t(Race:______________________)_S 80 _t2872 13203 _m
+2952 13203 _m
+1200 _t(Spoken)_S 160 _t(Written)_S 80 _t5432 13203 _m
+5512 13203 _m
+3200 _t8712 13203 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 4348 _m
+_sp 334 4391 1 _pl _s 347 4348 _m
+_sp 347 4391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1940 4348 _m
+_sp 1940 4391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 4348 _m
+_sp 3647 4391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 4348 _m
+_sp 5828 4391 1 _pl _s 5841 4348 _m
+_sp 5841 4391 1 _pl _s grestore _s grestore 472 13070 _m
+552 13070 _m
+80 _t(Height:________)_S 80 _t(Hair:______)_S 80 _t2872 13070 _m
+2952 13070 _m
+(1____________)_S 160 _t(______)_S 160 _t(_______)_S 80 _t5432 13070 _m
+5512 13070 _m
+80 _t(1______________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 13070 _m
+8792 13070 _m
+240 _tgsave 1.5 3 scale gsave 0 0 0 _c _s 334 4304 _m
+_sp 334 4347 1 _pl _s 347 4304 _m
+_sp 347 4347 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1940 4304 _m
+_sp 1940 4347 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 4304 _m
+_sp 3647 4347 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 4304 _m
+_sp 5828 4347 1 _pl _s 5841 4304 _m
+_sp 5841 4347 1 _pl _s grestore _s grestore 472 12937 _m
+552 12937 _m
+80 _t(Weight:________)_S 80 _t(Eyes:______)_S 80 _t2872 12937 _m
+2952 12937 _m
+(2____________)_S 160 _t(______)_S 160 _t(_______)_S 80 _t5432 12937 _m
+5512 12937 _m
+80 _t(2______________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 12937 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 4260 _m
+_sp 334 4303 1 _pl _s 347 4260 _m
+_sp 347 4303 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1940 4260 _m
+_sp 1940 4303 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 4260 _m
+_sp 3647 4303 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 4260 _m
+_sp 5828 4303 1 _pl _s 5841 4260 _m
+_sp 5841 4303 1 _pl _s grestore _s grestore 472 12804 _m
+552 12804 _m
+80 _t(Age:___________)_S 80 _t(Gender:____)_S 80 _t2872 12804 _m
+2952 12804 _m
+(3____________)_S 160 _t(______)_S 160 _t(_______)_S 80 _t5432 12804 _m
+5512 12804 _m
+80 _t(3______________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 12804 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 4215 _m
+_sp 334 4258 1 _pl _s 347 4215 _m
+_sp 347 4258 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1940 4215 _m
+_sp 1940 4258 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 4215 _m
+_sp 3647 4258 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 4215 _m
+_sp 5828 4258 1 _pl _s 5841 4215 _m
+_sp 5841 4258 1 _pl _s grestore _s grestore 472 12671 _m
+552 12671 _m
+80 _t(Appearance)_S 80 _t(\(AP\):___________)_S 80 _t2872 12671 _m
+2952 12671 _m
+(4____________)_S 160 _t(______)_S 160 _t(_______)_S 80 _t5432 12671 _m
+5512 12671 _m
+80 _t(4______________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 12671 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 4171 _m
+_sp 334 4214 1 _pl _s 347 4171 _m
+_sp 347 4214 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1940 4171 _m
+_sp 1940 4214 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 4171 _m
+_sp 3647 4214 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 4171 _m
+_sp 5828 4214 1 _pl _s 5841 4171 _m
+_sp 5841 4214 1 _pl _s grestore _s grestore 472 12538 _m
+552 12538 _m
+80 _t(Demeanor:__________________)_S 80 _t2872 12538 _m
+2952 12538 _m
+(5____________)_S 160 _t(______)_S 160 _t(_______)_S 80 _t5432 12538 _m
+5512 12538 _m
+80 _t(5______________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 12538 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 4127 _m
+_sp 334 4170 1 _pl _s 347 4127 _m
+_sp 347 4170 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1940 4127 _m
+_sp 1940 4170 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 4127 _m
+_sp 3647 4170 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 4127 _m
+_sp 5828 4170 1 _pl _s 5841 4127 _m
+_sp 5841 4170 1 _pl _s grestore _s grestore 472 12405 _m
+552 12405 _m
+80 _t(Special:___________________)_S 80 _t2872 12405 _m
+2952 12405 _m
+(6____________)_S 160 _t(______)_S 160 _t(_______)_S 80 _t5432 12405 _m
+5512 12405 _m
+80 _t(6______________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 12405 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 4082 _m
+_sp 334 4125 1 _pl _s 347 4082 _m
+_sp 347 4125 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1940 4082 _m
+_sp 1940 4125 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 4082 _m
+_sp 3647 4125 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 4082 _m
+_sp 5828 4125 1 _pl _s 5841 4082 _m
+_sp 5841 4125 1 _pl _s grestore _s grestore 472 12272 _m
+552 12272 _m
+80 _t(Profession:________________)_S 80 _t2872 12272 _m
+2952 12272 _m
+(7____________)_S 160 _t(______)_S 160 _t(_______)_S 80 _t5432 12272 _m
+5512 12272 _m
+80 _t(7______________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 12272 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 4038 _m
+_sp 334 4081 1 _pl _s 347 4038 _m
+_sp 347 4081 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1940 4038 _m
+_sp 1940 4081 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 4038 _m
+_sp 3647 4081 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 4038 _m
+_sp 5828 4081 1 _pl _s 5841 4038 _m
+_sp 5841 4081 1 _pl _s grestore _s grestore 472 12139 _m
+552 12139 _m
+80 _t(Level:_____________________)_S 80 _t2872 12139 _m
+2952 12139 _m
+(8____________)_S 160 _t(______)_S 160 _t(_______)_S 80 _t5432 12139 _m
+5512 12139 _m
+80 _t(8______________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 12139 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3994 _m
+_sp 334 4037 1 _pl _s 347 3994 _m
+_sp 347 4037 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1940 3994 _m
+_sp 1940 4037 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3994 _m
+_sp 3647 4037 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3994 _m
+_sp 5828 4037 1 _pl _s 5841 3994 _m
+_sp 5841 4037 1 _pl _s grestore _s grestore 472 12006 _m
+552 12006 _m
+80 _t(Exp.)_S 80 _t(Points:_______________)_S 80 _t2872 12006 _m
+2952 12006 _m
+(9____________)_S 160 _t(______)_S 160 _t(_______)_S 80 _t5432 12006 _m
+5512 12006 _m
+80 _t(9______________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 12006 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 366 3970 _m
+_sp 347 3970 1 _pl _s 347 3992 _m
+_sp 347 3949 1 _pl _s 334 3992 _m
+_sp 334 3949 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 368 3970 _m
+_sp 420 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 421 3970 _m
+_sp 473 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 474 3970 _m
+_sp 526 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 528 3970 _m
+_sp 580 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 581 3970 _m
+_sp 633 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 634 3970 _m
+_sp 686 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 688 3970 _m
+_sp 740 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 741 3970 _m
+_sp 793 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 794 3970 _m
+_sp 846 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 848 3970 _m
+_sp 900 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 901 3970 _m
+_sp 953 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 954 3970 _m
+_sp 1006 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1008 3970 _m
+_sp 1060 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1061 3970 _m
+_sp 1113 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1114 3970 _m
+_sp 1166 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1168 3970 _m
+_sp 1220 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1221 3970 _m
+_sp 1273 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1274 3970 _m
+_sp 1326 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1328 3970 _m
+_sp 1380 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1381 3970 _m
+_sp 1433 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1434 3970 _m
+_sp 1486 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1488 3970 _m
+_sp 1540 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1541 3970 _m
+_sp 1593 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1594 3970 _m
+_sp 1646 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1648 3970 _m
+_sp 1700 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1701 3970 _m
+_sp 1753 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1754 3970 _m
+_sp 1806 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1808 3970 _m
+_sp 1860 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1861 3970 _m
+_sp 1913 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1966 3970 _m
+_sp 1914 3970 1940 3970 1940 3992 1940 3970 4 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1968 3970 _m
+_sp 2020 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2021 3970 _m
+_sp 2073 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2074 3970 _m
+_sp 2126 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2128 3970 _m
+_sp 2180 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2181 3970 _m
+_sp 2233 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2234 3970 _m
+_sp 2286 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2288 3970 _m
+_sp 2340 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2341 3970 _m
+_sp 2393 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2394 3970 _m
+_sp 2446 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2448 3970 _m
+_sp 2500 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2501 3970 _m
+_sp 2553 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2554 3970 _m
+_sp 2606 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2608 3970 _m
+_sp 2660 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2661 3970 _m
+_sp 2713 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2714 3970 _m
+_sp 2766 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2768 3970 _m
+_sp 2820 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2821 3970 _m
+_sp 2873 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2874 3970 _m
+_sp 2926 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2928 3970 _m
+_sp 2980 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2981 3970 _m
+_sp 3033 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3034 3970 _m
+_sp 3086 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3088 3970 _m
+_sp 3140 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3141 3970 _m
+_sp 3193 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3194 3970 _m
+_sp 3246 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3248 3970 _m
+_sp 3300 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3301 3970 _m
+_sp 3353 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3354 3970 _m
+_sp 3406 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3408 3970 _m
+_sp 3460 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3461 3970 _m
+_sp 3513 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3514 3970 _m
+_sp 3566 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3568 3970 _m
+_sp 3620 3970 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3949 _m
+_sp 3647 3992 3647 3970 3621 3970 3647 3970 4 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3949 _m
+_sp 5828 3992 1 _pl _s 5841 3949 _m
+_sp 5841 3992 1 _pl _s grestore _s grestore 472 11873 _m
+552 11873 _m
+632 11873 _m
+712 11873 _m
+792 11873 _m
+872 11873 _m
+952 11873 _m
+1032 11873 _m
+1112 11873 _m
+1192 11873 _m
+1272 11873 _m
+1352 11873 _m
+1432 11873 _m
+1512 11873 _m
+1592 11873 _m
+1672 11873 _m
+1752 11873 _m
+1832 11873 _m
+1912 11873 _m
+1992 11873 _m
+2072 11873 _m
+2152 11873 _m
+2232 11873 _m
+2312 11873 _m
+2392 11873 _m
+2472 11873 _m
+2552 11873 _m
+2632 11873 _m
+2712 11873 _m
+2792 11873 _m
+2872 11873 _m
+2952 11873 _m
+3032 11873 _m
+3112 11873 _m
+3192 11873 _m
+3272 11873 _m
+3352 11873 _m
+3432 11873 _m
+3512 11873 _m
+3592 11873 _m
+3672 11873 _m
+3752 11873 _m
+3832 11873 _m
+3912 11873 _m
+3992 11873 _m
+4072 11873 _m
+4152 11873 _m
+4232 11873 _m
+4312 11873 _m
+4392 11873 _m
+4472 11873 _m
+4552 11873 _m
+4632 11873 _m
+4712 11873 _m
+4792 11873 _m
+4872 11873 _m
+4952 11873 _m
+5032 11873 _m
+5112 11873 _m
+5192 11873 _m
+5272 11873 _m
+5352 11873 _m
+5432 11873 _m
+5512 11873 _m
+80 _t(10_____________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 11873 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3905 _m
+_sp 334 3948 1 _pl _s 347 3905 _m
+_sp 347 3948 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3905 _m
+_sp 3647 3948 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3905 _m
+_sp 5828 3948 1 _pl _s 5841 3905 _m
+_sp 5841 3948 1 _pl _s grestore _s grestore 472 11740 _m
+552 11740 _m
+3200 _t(-----)_S 80 _t(BONUSES)_S 80 _t(-----)_S 160 _t5432 11740 _m
+5512 11740 _m
+80 _t(11_____________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 11740 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3861 _m
+_sp 334 3904 1 _pl _s 347 3861 _m
+_sp 347 3904 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3861 _m
+_sp 3647 3904 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3861 _m
+_sp 5828 3904 1 _pl _s 5841 3861 _m
+_sp 5841 3904 1 _pl _s grestore _s grestore 472 11607 _m
+552 11607 _m
+80 _t(STATS)_S 720 _t(abbr)_S 240 _t(Temp)_S 160 _t(Pot)_S 160 _t(Dev)_S 80 _t(P)_S 160 _t(Normal)_S 160 _t(Race)_S 160 _t(Total)_S 160 _t5432 11607 _m
+5512 11607 _m
+80 _t(12_____________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 11607 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3816 _m
+_sp 334 3859 1 _pl _s 347 3816 _m
+_sp 347 3859 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3816 _m
+_sp 3647 3859 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3816 _m
+_sp 5828 3859 1 _pl _s 5841 3816 _m
+_sp 5841 3859 1 _pl _s grestore _s grestore 472 11474 _m
+552 11474 _m
+80 _t(Constitution)_S 160 _t(\(CO\))_S 240 _t(____)_S 160 _t(___)_S 160 _t(_____)_S 160 _t(______)_S 160 _t(____)_S 160 _t(_____)_S 160 _t5432 11474 _m
+5512 11474 _m
+80 _t(13_____________)_S 160 _t(________)_S 160 _t(___________)_S 80 _t8712 11474 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3772 _m
+_sp 334 3815 1 _pl _s 347 3772 _m
+_sp 347 3815 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3772 _m
+_sp 3647 3815 3647 3793 3673 3793 3647 3793 4 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3674 3793 _m
+_sp 3726 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3728 3793 _m
+_sp 3780 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3781 3793 _m
+_sp 3833 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3834 3793 _m
+_sp 3886 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3888 3793 _m
+_sp 3940 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3941 3793 _m
+_sp 3993 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3994 3793 _m
+_sp 4046 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4048 3793 _m
+_sp 4100 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4101 3793 _m
+_sp 4153 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4154 3793 _m
+_sp 4206 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4208 3793 _m
+_sp 4260 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4261 3793 _m
+_sp 4313 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4314 3793 _m
+_sp 4366 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4368 3793 _m
+_sp 4420 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4421 3793 _m
+_sp 4473 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4474 3793 _m
+_sp 4526 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4528 3793 _m
+_sp 4580 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4581 3793 _m
+_sp 4633 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4634 3793 _m
+_sp 4686 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4688 3793 _m
+_sp 4740 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4741 3793 _m
+_sp 4793 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4794 3793 _m
+_sp 4846 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4848 3793 _m
+_sp 4900 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4901 3793 _m
+_sp 4953 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4954 3793 _m
+_sp 5006 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5008 3793 _m
+_sp 5060 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5061 3793 _m
+_sp 5113 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5114 3793 _m
+_sp 5166 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5168 3793 _m
+_sp 5220 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5221 3793 _m
+_sp 5273 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5274 3793 _m
+_sp 5326 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5328 3793 _m
+_sp 5380 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5381 3793 _m
+_sp 5433 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5434 3793 _m
+_sp 5486 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5488 3793 _m
+_sp 5540 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5541 3793 _m
+_sp 5593 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5594 3793 _m
+_sp 5646 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5648 3793 _m
+_sp 5700 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5701 3793 _m
+_sp 5753 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5754 3793 _m
+_sp 5806 3793 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5808 3793 _m
+_sp 5828 3793 1 _pl _s 5841 3772 _m
+_sp 5841 3815 1 _pl _s 5828 3815 _m
+_sp 5828 3772 1 _pl _s grestore _s grestore 472 11341 _m
+552 11341 _m
+80 _t(Agility)_S 560 _t(\(AG\))_S 240 _t(____)_S 160 _t(___)_S 160 _t(_____)_S 160 _t(______)_S 160 _t(____)_S 160 _t(_____)_S 160 _t5432 11341 _m
+5512 11341 _m
+5592 11341 _m
+5672 11341 _m
+5752 11341 _m
+5832 11341 _m
+5912 11341 _m
+5992 11341 _m
+6072 11341 _m
+6152 11341 _m
+6232 11341 _m
+6312 11341 _m
+6392 11341 _m
+6472 11341 _m
+6552 11341 _m
+6632 11341 _m
+6712 11341 _m
+6792 11341 _m
+6872 11341 _m
+6952 11341 _m
+7032 11341 _m
+7112 11341 _m
+7192 11341 _m
+7272 11341 _m
+7352 11341 _m
+7432 11341 _m
+7512 11341 _m
+7592 11341 _m
+7672 11341 _m
+7752 11341 _m
+7832 11341 _m
+7912 11341 _m
+7992 11341 _m
+8072 11341 _m
+8152 11341 _m
+8232 11341 _m
+8312 11341 _m
+8392 11341 _m
+8472 11341 _m
+8552 11341 _m
+8632 11341 _m
+8712 11341 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3728 _m
+_sp 334 3771 1 _pl _s 347 3728 _m
+_sp 347 3771 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3728 _m
+_sp 3647 3771 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3728 _m
+_sp 5828 3771 1 _pl _s 5841 3728 _m
+_sp 5841 3771 1 _pl _s grestore _s grestore 472 11208 _m
+552 11208 _m
+80 _t(Self-Disc)_S 400 _t(\(SD\))_S 240 _t(____)_S 160 _t(___)_S 160 _t(_____)_S 160 _t(______)_S 160 _t(____)_S 160 _t(_____)_S 160 _t5432 11208 _m
+5512 11208 _m
+80 _t(Base)_S 80 _t(Hits:_________)_S 80 _t(Realm:____________)_S 80 _t8712 11208 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3683 _m
+_sp 334 3726 1 _pl _s 347 3683 _m
+_sp 347 3726 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3683 _m
+_sp 3647 3726 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3683 _m
+_sp 5828 3726 1 _pl _s 5841 3683 _m
+_sp 5841 3726 1 _pl _s grestore _s grestore 472 11075 _m
+552 11075 _m
+80 _t(Memory)_S 640 _t(\(ME\))_S 240 _t(____)_S 160 _t(___)_S 160 _t(_____)_S 160 _t(______)_S 160 _t(____)_S 160 _t(_____)_S 160 _t5432 11075 _m
+5512 11075 _m
+3200 _t8712 11075 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3639 _m
+_sp 334 3682 1 _pl _s 347 3639 _m
+_sp 347 3682 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3639 _m
+_sp 3647 3682 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3639 _m
+_sp 5828 3682 1 _pl _s 5841 3639 _m
+_sp 5841 3682 1 _pl _s grestore _s grestore 472 10942 _m
+552 10942 _m
+80 _t(Reasoning)_S 400 _t(\(RE\))_S 240 _t(____)_S 160 _t(___)_S 160 _t(_____)_S 160 _t(______)_S 160 _t(____)_S 160 _t(_____)_S 160 _t5432 10942 _m
+5512 10942 _m
+80 _t(Total)_S 80 _t(Hits:________)_S 80 _t(Power)_S 80 _t(Points:_____)_S 80 _t8712 10942 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3595 _m
+_sp 334 3638 1 _pl _s 347 3595 _m
+_sp 347 3638 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3595 _m
+_sp 3647 3638 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3595 _m
+_sp 5828 3638 1 _pl _s 5841 3595 _m
+_sp 5841 3638 1 _pl _s grestore _s grestore 472 10809 _m
+552 10809 _m
+80 _t(Strength)_S 480 _t(\(ST\))_S 240 _t(____)_S 160 _t(___)_S 160 _t(xxxxx)_S 160 _t(______)_S 160 _t(____)_S 160 _t(_____)_S 160 _t5432 10809 _m
+5512 10809 _m
+3200 _t8712 10809 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3550 _m
+_sp 334 3593 1 _pl _s 347 3550 _m
+_sp 347 3593 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3550 _m
+_sp 3647 3593 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3550 _m
+_sp 5828 3593 1 _pl _s 5841 3550 _m
+_sp 5841 3593 1 _pl _s grestore _s grestore 472 10676 _m
+552 10676 _m
+80 _t(Quickness)_S 400 _t(\(QU\))_S 240 _t(____)_S 160 _t(___)_S 160 _t(xxxxx)_S 160 _t(______)_S 160 _t(____)_S 160 _t(_____)_S 160 _t5432 10676 _m
+5512 10676 _m
+3200 _t8712 10676 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3506 _m
+_sp 334 3549 1 _pl _s 347 3506 _m
+_sp 347 3549 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3506 _m
+_sp 3647 3549 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3506 _m
+_sp 5828 3549 1 _pl _s 5841 3506 _m
+_sp 5841 3549 1 _pl _s grestore _s grestore 472 10543 _m
+552 10543 _m
+80 _t(Presence)_S 480 _t(\(PR\))_S 240 _t(____)_S 160 _t(___)_S 160 _t(xxxxx)_S 160 _t(______)_S 160 _t(____)_S 160 _t(_____)_S 160 _t5432 10543 _m
+5512 10543 _m
+80 _t(Armor)_S 80 _t(Type:________)_S 80 _t(Maximum)_S 80 _t(Pace:_____)_S 80 _t8712 10543 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3462 _m
+_sp 334 3505 1 _pl _s 347 3462 _m
+_sp 347 3505 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3462 _m
+_sp 3647 3505 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3462 _m
+_sp 5828 3505 1 _pl _s 5841 3462 _m
+_sp 5841 3505 1 _pl _s grestore _s grestore 472 10410 _m
+552 10410 _m
+80 _t(Empathy)_S 560 _t(\(EM\))_S 240 _t(____)_S 160 _t(___)_S 160 _t(xxxxx)_S 160 _t(______)_S 160 _t(____)_S 160 _t(_____)_S 160 _t5432 10410 _m
+5512 10410 _m
+80 _t(Def.)_S 80 _t(Bonus:________)_S 80 _t(Base)_S 80 _t(Movmt.)_S 80 _t(Rate:_)_S 80 _t8712 10410 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3417 _m
+_sp 334 3460 1 _pl _s 347 3417 _m
+_sp 347 3460 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3647 3417 _m
+_sp 3647 3460 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3417 _m
+_sp 5828 3460 1 _pl _s 5841 3417 _m
+_sp 5841 3460 1 _pl _s grestore _s grestore 472 10277 _m
+552 10277 _m
+80 _t(Intuition)_S 400 _t(\(IN\))_S 240 _t(____)_S 160 _t(___)_S 160 _t(xxxxx)_S 160 _t(______)_S 160 _t(____)_S 160 _t(_____)_S 160 _t5432 10277 _m
+5512 10277 _m
+80 _t(Shield)_S 80 _t(Bonus:______)_S 80 _t(__________________)_S 80 _t8712 10277 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 366 3398 _m
+_sp 347 3416 347 3398 2 _pl _s 347 3373 _m
+_sp 366 3391 347 3391 2 _pl _s 334 3416 _m
+_sp 334 3373 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 368 3398 _m
+_sp 420 3398 1 _pl _s 368 3391 _m
+_sp 420 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 421 3398 _m
+_sp 473 3398 1 _pl _s 421 3391 _m
+_sp 473 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 474 3398 _m
+_sp 526 3398 1 _pl _s 474 3391 _m
+_sp 526 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 528 3398 _m
+_sp 580 3398 1 _pl _s 528 3391 _m
+_sp 580 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 581 3398 _m
+_sp 633 3398 1 _pl _s 581 3391 _m
+_sp 633 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 634 3398 _m
+_sp 686 3398 1 _pl _s 634 3391 _m
+_sp 686 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 688 3398 _m
+_sp 740 3398 1 _pl _s 688 3391 _m
+_sp 740 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 741 3398 _m
+_sp 793 3398 1 _pl _s 741 3391 _m
+_sp 793 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 794 3398 _m
+_sp 846 3398 1 _pl _s 794 3391 _m
+_sp 846 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 848 3398 _m
+_sp 900 3398 1 _pl _s 848 3391 _m
+_sp 900 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 901 3398 _m
+_sp 953 3398 1 _pl _s 901 3391 _m
+_sp 953 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 954 3398 _m
+_sp 1006 3398 1 _pl _s 954 3391 _m
+_sp 1006 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1008 3398 _m
+_sp 1060 3398 1 _pl _s 1008 3391 _m
+_sp 1060 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1061 3398 _m
+_sp 1113 3398 1 _pl _s 1061 3391 _m
+_sp 1113 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1114 3398 _m
+_sp 1166 3398 1 _pl _s 1114 3391 _m
+_sp 1166 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1168 3398 _m
+_sp 1220 3398 1 _pl _s 1168 3391 _m
+_sp 1220 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1221 3398 _m
+_sp 1273 3398 1 _pl _s 1221 3391 _m
+_sp 1273 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1274 3398 _m
+_sp 1326 3398 1 _pl _s 1274 3391 _m
+_sp 1326 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1328 3398 _m
+_sp 1380 3398 1 _pl _s 1328 3391 _m
+_sp 1380 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1381 3398 _m
+_sp 1433 3398 1 _pl _s 1381 3391 _m
+_sp 1433 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1434 3398 _m
+_sp 1486 3398 1 _pl _s 1434 3391 _m
+_sp 1486 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1488 3398 _m
+_sp 1540 3398 1 _pl _s 1488 3391 _m
+_sp 1540 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1541 3398 _m
+_sp 1593 3398 1 _pl _s 1541 3391 _m
+_sp 1593 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1594 3398 _m
+_sp 1646 3398 1 _pl _s 1594 3391 _m
+_sp 1646 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 3373 _m
+_sp 1674 3391 1 _pl _s 1700 3398 _m
+_sp 1648 3398 1 _pl _s 1700 3391 _m
+_sp 1648 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1701 3398 _m
+_sp 1753 3398 1 _pl _s 1701 3391 _m
+_sp 1753 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1754 3398 _m
+_sp 1806 3398 1 _pl _s 1754 3391 _m
+_sp 1806 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1808 3398 _m
+_sp 1860 3398 1 _pl _s 1808 3391 _m
+_sp 1860 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1861 3398 _m
+_sp 1913 3398 1 _pl _s 1861 3391 _m
+_sp 1913 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1914 3398 _m
+_sp 1966 3398 1 _pl _s 1914 3391 _m
+_sp 1966 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1968 3398 _m
+_sp 2020 3398 1 _pl _s 1968 3391 _m
+_sp 2020 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2021 3398 _m
+_sp 2073 3398 1 _pl _s 2021 3391 _m
+_sp 2073 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2074 3398 _m
+_sp 2126 3398 1 _pl _s 2074 3391 _m
+_sp 2126 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2128 3398 _m
+_sp 2180 3398 1 _pl _s 2128 3391 _m
+_sp 2180 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2181 3398 _m
+_sp 2233 3398 1 _pl _s 2181 3391 _m
+_sp 2233 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2234 3398 _m
+_sp 2286 3398 1 _pl _s 2234 3391 _m
+_sp 2286 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2288 3398 _m
+_sp 2340 3398 1 _pl _s 2288 3391 _m
+_sp 2340 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2341 3398 _m
+_sp 2393 3398 1 _pl _s 2341 3391 _m
+_sp 2393 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2394 3398 _m
+_sp 2446 3398 1 _pl _s 2394 3391 _m
+_sp 2446 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2448 3398 _m
+_sp 2500 3398 1 _pl _s 2448 3391 _m
+_sp 2500 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2501 3398 _m
+_sp 2553 3398 1 _pl _s 2501 3391 _m
+_sp 2553 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2554 3398 _m
+_sp 2606 3398 1 _pl _s 2554 3391 _m
+_sp 2606 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2608 3398 _m
+_sp 2660 3398 1 _pl _s 2608 3391 _m
+_sp 2660 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2661 3398 _m
+_sp 2713 3398 1 _pl _s 2661 3391 _m
+_sp 2713 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2714 3398 _m
+_sp 2766 3398 1 _pl _s 2714 3391 _m
+_sp 2766 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2768 3398 _m
+_sp 2820 3398 1 _pl _s 2768 3391 _m
+_sp 2820 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2821 3398 _m
+_sp 2873 3398 1 _pl _s 2821 3391 _m
+_sp 2873 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2874 3398 _m
+_sp 2926 3398 1 _pl _s 2874 3391 _m
+_sp 2926 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2928 3398 _m
+_sp 2980 3398 1 _pl _s 2928 3391 _m
+_sp 2980 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2981 3398 _m
+_sp 3033 3398 1 _pl _s 2981 3391 _m
+_sp 3033 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3034 3398 _m
+_sp 3086 3398 1 _pl _s 3034 3391 _m
+_sp 3086 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3088 3398 _m
+_sp 3140 3398 1 _pl _s 3088 3391 _m
+_sp 3140 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3141 3398 _m
+_sp 3193 3398 1 _pl _s 3141 3391 _m
+_sp 3193 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3194 3398 _m
+_sp 3246 3398 1 _pl _s 3194 3391 _m
+_sp 3246 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3248 3398 _m
+_sp 3300 3398 1 _pl _s 3248 3391 _m
+_sp 3300 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3301 3398 _m
+_sp 3353 3398 1 _pl _s 3301 3391 _m
+_sp 3353 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3354 3398 _m
+_sp 3406 3398 1 _pl _s 3354 3391 _m
+_sp 3406 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 3373 _m
+_sp 3434 3391 1 _pl _s 3460 3398 _m
+_sp 3408 3398 1 _pl _s 3460 3391 _m
+_sp 3408 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3461 3398 _m
+_sp 3513 3398 1 _pl _s 3461 3391 _m
+_sp 3513 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3514 3398 _m
+_sp 3566 3398 1 _pl _s 3514 3391 _m
+_sp 3566 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3568 3398 _m
+_sp 3620 3398 1 _pl _s 3568 3391 _m
+_sp 3620 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3621 3391 _m
+_sp 3673 3391 1 _pl _s 3647 3416 _m
+_sp 3647 3398 1 _pl _s 3621 3398 _m
+_sp 3673 3398 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3674 3398 _m
+_sp 3726 3398 1 _pl _s 3674 3391 _m
+_sp 3726 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 3373 _m
+_sp 3754 3391 1 _pl _s 3780 3398 _m
+_sp 3728 3398 1 _pl _s 3780 3391 _m
+_sp 3728 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3781 3398 _m
+_sp 3833 3398 1 _pl _s 3781 3391 _m
+_sp 3833 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3834 3398 _m
+_sp 3886 3398 1 _pl _s 3834 3391 _m
+_sp 3886 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3888 3398 _m
+_sp 3940 3398 1 _pl _s 3888 3391 _m
+_sp 3940 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3941 3398 _m
+_sp 3993 3398 1 _pl _s 3941 3391 _m
+_sp 3993 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3994 3398 _m
+_sp 4046 3398 1 _pl _s 3994 3391 _m
+_sp 4046 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 3373 _m
+_sp 4074 3391 1 _pl _s 4100 3398 _m
+_sp 4048 3398 1 _pl _s 4100 3391 _m
+_sp 4048 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4101 3398 _m
+_sp 4153 3398 1 _pl _s 4101 3391 _m
+_sp 4153 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4154 3398 _m
+_sp 4206 3398 1 _pl _s 4154 3391 _m
+_sp 4206 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4208 3398 _m
+_sp 4260 3398 1 _pl _s 4208 3391 _m
+_sp 4260 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4261 3398 _m
+_sp 4313 3398 1 _pl _s 4261 3391 _m
+_sp 4313 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4314 3398 _m
+_sp 4366 3398 1 _pl _s 4314 3391 _m
+_sp 4366 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4368 3398 _m
+_sp 4420 3398 1 _pl _s 4368 3391 _m
+_sp 4420 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 3373 _m
+_sp 4447 3391 1 _pl _s 4473 3398 _m
+_sp 4421 3398 1 _pl _s 4473 3391 _m
+_sp 4421 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4474 3398 _m
+_sp 4526 3398 1 _pl _s 4474 3391 _m
+_sp 4526 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4528 3398 _m
+_sp 4580 3398 1 _pl _s 4528 3391 _m
+_sp 4580 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4581 3398 _m
+_sp 4633 3398 1 _pl _s 4581 3391 _m
+_sp 4633 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4634 3398 _m
+_sp 4686 3398 1 _pl _s 4634 3391 _m
+_sp 4686 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4688 3398 _m
+_sp 4740 3398 1 _pl _s 4688 3391 _m
+_sp 4740 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 3373 _m
+_sp 4767 3391 1 _pl _s 4793 3398 _m
+_sp 4741 3398 1 _pl _s 4793 3391 _m
+_sp 4741 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4794 3398 _m
+_sp 4846 3398 1 _pl _s 4794 3391 _m
+_sp 4846 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4848 3398 _m
+_sp 4900 3398 1 _pl _s 4848 3391 _m
+_sp 4900 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4901 3398 _m
+_sp 4953 3398 1 _pl _s 4901 3391 _m
+_sp 4953 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4954 3398 _m
+_sp 5006 3398 1 _pl _s 4954 3391 _m
+_sp 5006 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5008 3398 _m
+_sp 5060 3398 1 _pl _s 5008 3391 _m
+_sp 5060 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 3373 _m
+_sp 5087 3391 1 _pl _s 5113 3398 _m
+_sp 5061 3398 1 _pl _s 5113 3391 _m
+_sp 5061 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5114 3398 _m
+_sp 5166 3398 1 _pl _s 5114 3391 _m
+_sp 5166 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5168 3398 _m
+_sp 5220 3398 1 _pl _s 5168 3391 _m
+_sp 5220 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5221 3398 _m
+_sp 5273 3398 1 _pl _s 5221 3391 _m
+_sp 5273 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5274 3398 _m
+_sp 5326 3398 1 _pl _s 5274 3391 _m
+_sp 5326 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5328 3398 _m
+_sp 5380 3398 1 _pl _s 5328 3391 _m
+_sp 5380 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 3373 _m
+_sp 5407 3391 1 _pl _s 5433 3398 _m
+_sp 5381 3398 1 _pl _s 5433 3391 _m
+_sp 5381 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5434 3398 _m
+_sp 5486 3398 1 _pl _s 5434 3391 _m
+_sp 5486 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5488 3398 _m
+_sp 5540 3398 1 _pl _s 5488 3391 _m
+_sp 5540 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5541 3398 _m
+_sp 5593 3398 1 _pl _s 5541 3391 _m
+_sp 5593 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5594 3398 _m
+_sp 5646 3398 1 _pl _s 5594 3391 _m
+_sp 5646 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5648 3398 _m
+_sp 5700 3398 1 _pl _s 5648 3391 _m
+_sp 5700 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5701 3398 _m
+_sp 5753 3398 1 _pl _s 5701 3391 _m
+_sp 5753 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5754 3398 _m
+_sp 5806 3398 1 _pl _s 5754 3391 _m
+_sp 5806 3391 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5808 3391 _m
+_sp 5828 3373 5828 3391 2 _pl _s 5828 3416 _m
+_sp 5808 3398 5828 3398 2 _pl _s 5841 3416 _m
+_sp 5841 3373 1 _pl _s grestore _s grestore 472 10144 _m
+552 10144 _m
+632 10144 _m
+712 10144 _m
+792 10144 _m
+872 10144 _m
+952 10144 _m
+1032 10144 _m
+1112 10144 _m
+1192 10144 _m
+1272 10144 _m
+1352 10144 _m
+1432 10144 _m
+1512 10144 _m
+1592 10144 _m
+1672 10144 _m
+1752 10144 _m
+1832 10144 _m
+1912 10144 _m
+1992 10144 _m
+2072 10144 _m
+2152 10144 _m
+2232 10144 _m
+2312 10144 _m
+2392 10144 _m
+2472 10144 _m
+2552 10144 _m
+2632 10144 _m
+2712 10144 _m
+2792 10144 _m
+2872 10144 _m
+2952 10144 _m
+3032 10144 _m
+3112 10144 _m
+3192 10144 _m
+3272 10144 _m
+3352 10144 _m
+3432 10144 _m
+3512 10144 _m
+3592 10144 _m
+3672 10144 _m
+3752 10144 _m
+3832 10144 _m
+3912 10144 _m
+3992 10144 _m
+4072 10144 _m
+4152 10144 _m
+4232 10144 _m
+4312 10144 _m
+4392 10144 _m
+4472 10144 _m
+4552 10144 _m
+4632 10144 _m
+4712 10144 _m
+4792 10144 _m
+4872 10144 _m
+4952 10144 _m
+5032 10144 _m
+5112 10144 _m
+5192 10144 _m
+5272 10144 _m
+5352 10144 _m
+5432 10144 _m
+5512 10144 _m
+5592 10144 _m
+5672 10144 _m
+5752 10144 _m
+5832 10144 _m
+5912 10144 _m
+5992 10144 _m
+6072 10144 _m
+6152 10144 _m
+6232 10144 _m
+6312 10144 _m
+6392 10144 _m
+6472 10144 _m
+6552 10144 _m
+6632 10144 _m
+6712 10144 _m
+6792 10144 _m
+6872 10144 _m
+6952 10144 _m
+7032 10144 _m
+7112 10144 _m
+7192 10144 _m
+7272 10144 _m
+7352 10144 _m
+7432 10144 _m
+7512 10144 _m
+7592 10144 _m
+7672 10144 _m
+7752 10144 _m
+7832 10144 _m
+7912 10144 _m
+7992 10144 _m
+8072 10144 _m
+8152 10144 _m
+8232 10144 _m
+8312 10144 _m
+8392 10144 _m
+8472 10144 _m
+8552 10144 _m
+8632 10144 _m
+8712 10144 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3329 _m
+_sp 334 3372 1 _pl _s 347 3329 _m
+_sp 347 3372 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 3329 _m
+_sp 1674 3372 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 3329 _m
+_sp 3434 3372 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 3329 _m
+_sp 3754 3372 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 3329 _m
+_sp 4074 3372 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 3329 _m
+_sp 4447 3372 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 3329 _m
+_sp 4767 3372 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 3329 _m
+_sp 5087 3372 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 3329 _m
+_sp 5407 3372 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3329 _m
+_sp 5828 3372 1 _pl _s 5841 3329 _m
+_sp 5841 3372 1 _pl _s grestore _s grestore 472 10011 _m
+552 10011 _m
+80 _t(Skill/Capability)_S 160 _t(Cost)_S 80 _t2472 10011 _m
+2552 10011 _m
+80 _t(5)_S 80 _t(/)_S 80 _t(Rank)_S 400 _t(2)_S 80 _t(/)_S 80 _t(Rank)_S 240 _t(1/Rank)_S 80 _t5112 10011 _m
+5192 10011 _m
+80 _t(Rank)_S 5592 10011 _m
+5672 10011 _m
+80 _t(Stat)_S 6072 10011 _m
+6152 10011 _m
+80 _t(Level)_S 6632 10011 _m
+6712 10011 _m
+80 _t(Item)_S 7112 10011 _m
+7192 10011 _m
+80 _t(Misc)_S 7592 10011 _m
+7672 10011 _m
+80 _t(Misc)_S 8072 10011 _m
+8152 10011 _m
+80 _t(TOTAL)_S 80 _t8712 10011 _m
+8792 10011 _m
+560 _tgsave 1.5 3 scale gsave 0 0 0 _c _s 366 3305 _m
+_sp 347 3305 1 _pl _s 347 3327 _m
+_sp 347 3284 1 _pl _s 334 3327 _m
+_sp 334 3284 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 368 3305 _m
+_sp 420 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 421 3305 _m
+_sp 473 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 474 3305 _m
+_sp 526 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 528 3305 _m
+_sp 580 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 581 3305 _m
+_sp 633 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 634 3305 _m
+_sp 686 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 688 3305 _m
+_sp 740 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 741 3305 _m
+_sp 793 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 794 3305 _m
+_sp 846 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 848 3305 _m
+_sp 900 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 901 3305 _m
+_sp 953 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 954 3305 _m
+_sp 1006 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1008 3305 _m
+_sp 1060 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1061 3305 _m
+_sp 1113 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1114 3305 _m
+_sp 1166 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1168 3305 _m
+_sp 1220 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1221 3305 _m
+_sp 1273 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1274 3305 _m
+_sp 1326 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1328 3305 _m
+_sp 1380 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1381 3305 _m
+_sp 1433 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1434 3305 _m
+_sp 1486 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1488 3305 _m
+_sp 1540 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1541 3305 _m
+_sp 1593 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1594 3305 _m
+_sp 1646 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1700 3305 _m
+_sp 1648 3305 1 _pl _s 1674 3327 _m
+_sp 1674 3284 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1701 3305 _m
+_sp 1753 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1754 3305 _m
+_sp 1806 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1808 3305 _m
+_sp 1860 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1861 3305 _m
+_sp 1913 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1914 3305 _m
+_sp 1966 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1968 3305 _m
+_sp 2020 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2021 3305 _m
+_sp 2073 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2074 3305 _m
+_sp 2126 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2128 3305 _m
+_sp 2180 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2181 3305 _m
+_sp 2233 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2234 3305 _m
+_sp 2286 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2288 3305 _m
+_sp 2340 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2341 3305 _m
+_sp 2393 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2394 3305 _m
+_sp 2446 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2448 3305 _m
+_sp 2500 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2501 3305 _m
+_sp 2553 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2554 3305 _m
+_sp 2606 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2608 3305 _m
+_sp 2660 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2661 3305 _m
+_sp 2713 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2714 3305 _m
+_sp 2766 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2768 3305 _m
+_sp 2820 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2821 3305 _m
+_sp 2873 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2874 3305 _m
+_sp 2926 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2928 3305 _m
+_sp 2980 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2981 3305 _m
+_sp 3033 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3034 3305 _m
+_sp 3086 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3088 3305 _m
+_sp 3140 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3141 3305 _m
+_sp 3193 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3194 3305 _m
+_sp 3246 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3248 3305 _m
+_sp 3300 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3301 3305 _m
+_sp 3353 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3354 3305 _m
+_sp 3406 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3460 3305 _m
+_sp 3408 3305 1 _pl _s 3434 3327 _m
+_sp 3434 3284 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3461 3305 _m
+_sp 3513 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3514 3305 _m
+_sp 3566 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3568 3305 _m
+_sp 3620 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3621 3305 _m
+_sp 3673 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3674 3305 _m
+_sp 3726 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3780 3305 _m
+_sp 3728 3305 1 _pl _s 3754 3327 _m
+_sp 3754 3284 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3781 3305 _m
+_sp 3833 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3834 3305 _m
+_sp 3886 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3888 3305 _m
+_sp 3940 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3941 3305 _m
+_sp 3993 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3994 3305 _m
+_sp 4046 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4100 3305 _m
+_sp 4048 3305 1 _pl _s 4074 3327 _m
+_sp 4074 3284 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4101 3305 _m
+_sp 4153 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4154 3305 _m
+_sp 4206 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4208 3305 _m
+_sp 4260 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4261 3305 _m
+_sp 4313 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4314 3305 _m
+_sp 4366 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4368 3305 _m
+_sp 4420 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4473 3305 _m
+_sp 4421 3305 1 _pl _s 4447 3327 _m
+_sp 4447 3284 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4474 3305 _m
+_sp 4526 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4528 3305 _m
+_sp 4580 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4581 3305 _m
+_sp 4633 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4634 3305 _m
+_sp 4686 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4688 3305 _m
+_sp 4740 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4793 3305 _m
+_sp 4741 3305 1 _pl _s 4767 3327 _m
+_sp 4767 3284 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4794 3305 _m
+_sp 4846 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4848 3305 _m
+_sp 4900 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4901 3305 _m
+_sp 4953 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4954 3305 _m
+_sp 5006 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5008 3305 _m
+_sp 5060 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5113 3305 _m
+_sp 5061 3305 1 _pl _s 5087 3327 _m
+_sp 5087 3284 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5114 3305 _m
+_sp 5166 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5168 3305 _m
+_sp 5220 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5221 3305 _m
+_sp 5273 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5274 3305 _m
+_sp 5326 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5328 3305 _m
+_sp 5380 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5433 3305 _m
+_sp 5381 3305 1 _pl _s 5407 3327 _m
+_sp 5407 3284 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5434 3305 _m
+_sp 5486 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5488 3305 _m
+_sp 5540 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5541 3305 _m
+_sp 5593 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5594 3305 _m
+_sp 5646 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5648 3305 _m
+_sp 5700 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5701 3305 _m
+_sp 5753 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5754 3305 _m
+_sp 5806 3305 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5808 3305 _m
+_sp 5828 3305 1 _pl _s 5841 3284 _m
+_sp 5841 3327 1 _pl _s 5828 3327 _m
+_sp 5828 3284 1 _pl _s grestore _s grestore 472 9878 _m
+552 9878 _m
+632 9878 _m
+712 9878 _m
+792 9878 _m
+872 9878 _m
+952 9878 _m
+1032 9878 _m
+1112 9878 _m
+1192 9878 _m
+1272 9878 _m
+1352 9878 _m
+1432 9878 _m
+1512 9878 _m
+1592 9878 _m
+1672 9878 _m
+1752 9878 _m
+1832 9878 _m
+1912 9878 _m
+1992 9878 _m
+2072 9878 _m
+2152 9878 _m
+2232 9878 _m
+2312 9878 _m
+2392 9878 _m
+2472 9878 _m
+2552 9878 _m
+2632 9878 _m
+2712 9878 _m
+2792 9878 _m
+2872 9878 _m
+2952 9878 _m
+3032 9878 _m
+3112 9878 _m
+3192 9878 _m
+3272 9878 _m
+3352 9878 _m
+3432 9878 _m
+3512 9878 _m
+3592 9878 _m
+3672 9878 _m
+3752 9878 _m
+3832 9878 _m
+3912 9878 _m
+3992 9878 _m
+4072 9878 _m
+4152 9878 _m
+4232 9878 _m
+4312 9878 _m
+4392 9878 _m
+4472 9878 _m
+4552 9878 _m
+4632 9878 _m
+4712 9878 _m
+4792 9878 _m
+4872 9878 _m
+4952 9878 _m
+5032 9878 _m
+5112 9878 _m
+5192 9878 _m
+5272 9878 _m
+5352 9878 _m
+5432 9878 _m
+5512 9878 _m
+5592 9878 _m
+5672 9878 _m
+5752 9878 _m
+5832 9878 _m
+5912 9878 _m
+5992 9878 _m
+6072 9878 _m
+6152 9878 _m
+6232 9878 _m
+6312 9878 _m
+6392 9878 _m
+6472 9878 _m
+6552 9878 _m
+6632 9878 _m
+6712 9878 _m
+6792 9878 _m
+6872 9878 _m
+6952 9878 _m
+7032 9878 _m
+7112 9878 _m
+7192 9878 _m
+7272 9878 _m
+7352 9878 _m
+7432 9878 _m
+7512 9878 _m
+7592 9878 _m
+7672 9878 _m
+7752 9878 _m
+7832 9878 _m
+7912 9878 _m
+7992 9878 _m
+8072 9878 _m
+8152 9878 _m
+8232 9878 _m
+8312 9878 _m
+8392 9878 _m
+8472 9878 _m
+8552 9878 _m
+8632 9878 _m
+8712 9878 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3240 _m
+_sp 334 3283 1 _pl _s 347 3240 _m
+_sp 347 3283 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 3240 _m
+_sp 1674 3283 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 3240 _m
+_sp 3434 3283 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 3240 _m
+_sp 3754 3283 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 3240 _m
+_sp 4074 3283 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 3240 _m
+_sp 4447 3283 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 3240 _m
+_sp 4767 3283 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 3240 _m
+_sp 5087 3283 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 3240 _m
+_sp 5407 3283 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3240 _m
+_sp 5828 3283 1 _pl _s 5841 3240 _m
+_sp 5841 3283 1 _pl _s grestore _s grestore 472 9745 _m
+552 9745 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 9745 _m
+2552 9745 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 9745 _m
+5192 9745 _m
+80 _t(____)_S 5592 9745 _m
+5672 9745 _m
+80 _t(____)_S 6072 9745 _m
+6152 9745 _m
+80 _t(_____)_S 6632 9745 _m
+6712 9745 _m
+80 _t(____)_S 7112 9745 _m
+7192 9745 _m
+80 _t(____)_S 7592 9745 _m
+7672 9745 _m
+80 _t(____)_S 8072 9745 _m
+8152 9745 _m
+80 _t(_____)_S 80 _t8712 9745 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3196 _m
+_sp 334 3239 1 _pl _s 347 3196 _m
+_sp 347 3239 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 3196 _m
+_sp 1674 3239 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 3196 _m
+_sp 3434 3239 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 3196 _m
+_sp 3754 3239 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 3196 _m
+_sp 4074 3239 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 3196 _m
+_sp 4447 3239 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 3196 _m
+_sp 4767 3239 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 3196 _m
+_sp 5087 3239 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 3196 _m
+_sp 5407 3239 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3196 _m
+_sp 5828 3239 1 _pl _s 5841 3196 _m
+_sp 5841 3239 1 _pl _s grestore _s grestore 472 9612 _m
+552 9612 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 9612 _m
+2552 9612 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 9612 _m
+5192 9612 _m
+80 _t(____)_S 5592 9612 _m
+5672 9612 _m
+80 _t(____)_S 6072 9612 _m
+6152 9612 _m
+80 _t(_____)_S 6632 9612 _m
+6712 9612 _m
+80 _t(____)_S 7112 9612 _m
+7192 9612 _m
+80 _t(____)_S 7592 9612 _m
+7672 9612 _m
+80 _t(____)_S 8072 9612 _m
+8152 9612 _m
+80 _t(_____)_S 80 _t8712 9612 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3151 _m
+_sp 334 3194 1 _pl _s 347 3151 _m
+_sp 347 3194 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 3151 _m
+_sp 1674 3194 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 3151 _m
+_sp 3434 3194 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 3151 _m
+_sp 3754 3194 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 3151 _m
+_sp 4074 3194 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 3151 _m
+_sp 4447 3194 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 3151 _m
+_sp 4767 3194 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 3151 _m
+_sp 5087 3194 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 3151 _m
+_sp 5407 3194 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3151 _m
+_sp 5828 3194 1 _pl _s 5841 3151 _m
+_sp 5841 3194 1 _pl _s grestore _s grestore 472 9479 _m
+552 9479 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 9479 _m
+2552 9479 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 9479 _m
+5192 9479 _m
+80 _t(____)_S 5592 9479 _m
+5672 9479 _m
+80 _t(____)_S 6072 9479 _m
+6152 9479 _m
+80 _t(_____)_S 6632 9479 _m
+6712 9479 _m
+80 _t(____)_S 7112 9479 _m
+7192 9479 _m
+80 _t(____)_S 7592 9479 _m
+7672 9479 _m
+80 _t(____)_S 8072 9479 _m
+8152 9479 _m
+80 _t(_____)_S 80 _t8712 9479 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3107 _m
+_sp 334 3150 1 _pl _s 347 3107 _m
+_sp 347 3150 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 3107 _m
+_sp 1674 3150 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 3107 _m
+_sp 3434 3150 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 3107 _m
+_sp 3754 3150 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 3107 _m
+_sp 4074 3150 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 3107 _m
+_sp 4447 3150 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 3107 _m
+_sp 4767 3150 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 3107 _m
+_sp 5087 3150 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 3107 _m
+_sp 5407 3150 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3107 _m
+_sp 5828 3150 1 _pl _s 5841 3107 _m
+_sp 5841 3150 1 _pl _s grestore _s grestore 472 9346 _m
+552 9346 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 9346 _m
+2552 9346 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 9346 _m
+5192 9346 _m
+80 _t(____)_S 5592 9346 _m
+5672 9346 _m
+80 _t(____)_S 6072 9346 _m
+6152 9346 _m
+80 _t(_____)_S 6632 9346 _m
+6712 9346 _m
+80 _t(____)_S 7112 9346 _m
+7192 9346 _m
+80 _t(____)_S 7592 9346 _m
+7672 9346 _m
+80 _t(____)_S 8072 9346 _m
+8152 9346 _m
+80 _t(_____)_S 80 _t8712 9346 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3063 _m
+_sp 334 3106 1 _pl _s 347 3063 _m
+_sp 347 3106 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 3063 _m
+_sp 1674 3106 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 3063 _m
+_sp 3434 3106 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 3063 _m
+_sp 3754 3106 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 3063 _m
+_sp 4074 3106 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 3063 _m
+_sp 4447 3106 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 3063 _m
+_sp 4767 3106 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 3063 _m
+_sp 5087 3106 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 3063 _m
+_sp 5407 3106 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3063 _m
+_sp 5828 3106 1 _pl _s 5841 3063 _m
+_sp 5841 3106 1 _pl _s grestore _s grestore 472 9213 _m
+552 9213 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 9213 _m
+2552 9213 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 9213 _m
+5192 9213 _m
+80 _t(____)_S 5592 9213 _m
+5672 9213 _m
+80 _t(____)_S 6072 9213 _m
+6152 9213 _m
+80 _t(_____)_S 6632 9213 _m
+6712 9213 _m
+80 _t(____)_S 7112 9213 _m
+7192 9213 _m
+80 _t(____)_S 7592 9213 _m
+7672 9213 _m
+80 _t(____)_S 8072 9213 _m
+8152 9213 _m
+80 _t(_____)_S 80 _t8712 9213 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 3018 _m
+_sp 334 3061 1 _pl _s 347 3018 _m
+_sp 347 3061 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 3018 _m
+_sp 1674 3061 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 3018 _m
+_sp 3434 3061 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 3018 _m
+_sp 3754 3061 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 3018 _m
+_sp 4074 3061 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 3018 _m
+_sp 4447 3061 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 3018 _m
+_sp 4767 3061 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 3018 _m
+_sp 5087 3061 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 3018 _m
+_sp 5407 3061 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 3018 _m
+_sp 5828 3061 1 _pl _s 5841 3018 _m
+_sp 5841 3061 1 _pl _s grestore _s grestore 472 9080 _m
+552 9080 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 9080 _m
+2552 9080 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 9080 _m
+5192 9080 _m
+80 _t(____)_S 5592 9080 _m
+5672 9080 _m
+80 _t(____)_S 6072 9080 _m
+6152 9080 _m
+80 _t(_____)_S 6632 9080 _m
+6712 9080 _m
+80 _t(____)_S 7112 9080 _m
+7192 9080 _m
+80 _t(____)_S 7592 9080 _m
+7672 9080 _m
+80 _t(____)_S 8072 9080 _m
+8152 9080 _m
+80 _t(_____)_S 80 _t8712 9080 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2974 _m
+_sp 334 3017 1 _pl _s 347 2974 _m
+_sp 347 3017 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2974 _m
+_sp 1674 3017 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2974 _m
+_sp 3434 3017 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2974 _m
+_sp 3754 3017 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2974 _m
+_sp 4074 3017 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2974 _m
+_sp 4447 3017 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2974 _m
+_sp 4767 3017 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2974 _m
+_sp 5087 3017 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2974 _m
+_sp 5407 3017 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2974 _m
+_sp 5828 3017 1 _pl _s 5841 2974 _m
+_sp 5841 3017 1 _pl _s grestore _s grestore 472 8947 _m
+552 8947 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 8947 _m
+2552 8947 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 8947 _m
+5192 8947 _m
+80 _t(____)_S 5592 8947 _m
+5672 8947 _m
+80 _t(____)_S 6072 8947 _m
+6152 8947 _m
+80 _t(_____)_S 6632 8947 _m
+6712 8947 _m
+80 _t(____)_S 7112 8947 _m
+7192 8947 _m
+80 _t(____)_S 7592 8947 _m
+7672 8947 _m
+80 _t(____)_S 8072 8947 _m
+8152 8947 _m
+80 _t(_____)_S 80 _t8712 8947 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2930 _m
+_sp 334 2973 1 _pl _s 347 2930 _m
+_sp 347 2973 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2930 _m
+_sp 1674 2973 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2930 _m
+_sp 3434 2973 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2930 _m
+_sp 3754 2973 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2930 _m
+_sp 4074 2973 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2930 _m
+_sp 4447 2973 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2930 _m
+_sp 4767 2973 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2930 _m
+_sp 5087 2973 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2930 _m
+_sp 5407 2973 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2930 _m
+_sp 5828 2973 1 _pl _s 5841 2930 _m
+_sp 5841 2973 1 _pl _s grestore _s grestore 472 8814 _m
+552 8814 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 8814 _m
+2552 8814 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 8814 _m
+5192 8814 _m
+80 _t(____)_S 5592 8814 _m
+5672 8814 _m
+80 _t(____)_S 6072 8814 _m
+6152 8814 _m
+80 _t(_____)_S 6632 8814 _m
+6712 8814 _m
+80 _t(____)_S 7112 8814 _m
+7192 8814 _m
+80 _t(____)_S 7592 8814 _m
+7672 8814 _m
+80 _t(____)_S 8072 8814 _m
+8152 8814 _m
+80 _t(_____)_S 80 _t8712 8814 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2885 _m
+_sp 334 2928 1 _pl _s 347 2885 _m
+_sp 347 2928 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2885 _m
+_sp 1674 2928 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2885 _m
+_sp 3434 2928 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2885 _m
+_sp 3754 2928 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2885 _m
+_sp 4074 2928 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2885 _m
+_sp 4447 2928 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2885 _m
+_sp 4767 2928 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2885 _m
+_sp 5087 2928 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2885 _m
+_sp 5407 2928 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2885 _m
+_sp 5828 2928 1 _pl _s 5841 2885 _m
+_sp 5841 2928 1 _pl _s grestore _s grestore 472 8681 _m
+552 8681 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 8681 _m
+2552 8681 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 8681 _m
+5192 8681 _m
+80 _t(____)_S 5592 8681 _m
+5672 8681 _m
+80 _t(____)_S 6072 8681 _m
+6152 8681 _m
+80 _t(_____)_S 6632 8681 _m
+6712 8681 _m
+80 _t(____)_S 7112 8681 _m
+7192 8681 _m
+80 _t(____)_S 7592 8681 _m
+7672 8681 _m
+80 _t(____)_S 8072 8681 _m
+8152 8681 _m
+80 _t(_____)_S 80 _t8712 8681 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2841 _m
+_sp 334 2884 1 _pl _s 347 2841 _m
+_sp 347 2884 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2841 _m
+_sp 1674 2884 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2841 _m
+_sp 3434 2884 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2841 _m
+_sp 3754 2884 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2841 _m
+_sp 4074 2884 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2841 _m
+_sp 4447 2884 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2841 _m
+_sp 4767 2884 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2841 _m
+_sp 5087 2884 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2841 _m
+_sp 5407 2884 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2841 _m
+_sp 5828 2884 1 _pl _s 5841 2841 _m
+_sp 5841 2884 1 _pl _s grestore _s grestore 472 8548 _m
+552 8548 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 8548 _m
+2552 8548 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 8548 _m
+5192 8548 _m
+80 _t(____)_S 5592 8548 _m
+5672 8548 _m
+80 _t(____)_S 6072 8548 _m
+6152 8548 _m
+80 _t(_____)_S 6632 8548 _m
+6712 8548 _m
+80 _t(____)_S 7112 8548 _m
+7192 8548 _m
+80 _t(____)_S 7592 8548 _m
+7672 8548 _m
+80 _t(____)_S 8072 8548 _m
+8152 8548 _m
+80 _t(_____)_S 80 _t8712 8548 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2797 _m
+_sp 334 2840 1 _pl _s 347 2797 _m
+_sp 347 2840 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2797 _m
+_sp 1674 2840 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2797 _m
+_sp 3434 2840 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2797 _m
+_sp 3754 2840 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2797 _m
+_sp 4074 2840 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2797 _m
+_sp 4447 2840 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2797 _m
+_sp 4767 2840 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2797 _m
+_sp 5087 2840 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2797 _m
+_sp 5407 2840 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2797 _m
+_sp 5828 2840 1 _pl _s 5841 2797 _m
+_sp 5841 2840 1 _pl _s grestore _s grestore 472 8415 _m
+552 8415 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 8415 _m
+2552 8415 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 8415 _m
+5192 8415 _m
+80 _t(____)_S 5592 8415 _m
+5672 8415 _m
+80 _t(____)_S 6072 8415 _m
+6152 8415 _m
+80 _t(_____)_S 6632 8415 _m
+6712 8415 _m
+80 _t(____)_S 7112 8415 _m
+7192 8415 _m
+80 _t(____)_S 7592 8415 _m
+7672 8415 _m
+80 _t(____)_S 8072 8415 _m
+8152 8415 _m
+80 _t(_____)_S 80 _t8712 8415 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2752 _m
+_sp 334 2795 1 _pl _s 347 2752 _m
+_sp 347 2795 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2752 _m
+_sp 1674 2795 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2752 _m
+_sp 3434 2795 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2752 _m
+_sp 3754 2795 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2752 _m
+_sp 4074 2795 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2752 _m
+_sp 4447 2795 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2752 _m
+_sp 4767 2795 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2752 _m
+_sp 5087 2795 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2752 _m
+_sp 5407 2795 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2752 _m
+_sp 5828 2795 1 _pl _s 5841 2752 _m
+_sp 5841 2795 1 _pl _s grestore _s grestore 472 8282 _m
+552 8282 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 8282 _m
+2552 8282 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 8282 _m
+5192 8282 _m
+80 _t(____)_S 5592 8282 _m
+5672 8282 _m
+80 _t(____)_S 6072 8282 _m
+6152 8282 _m
+80 _t(_____)_S 6632 8282 _m
+6712 8282 _m
+80 _t(____)_S 7112 8282 _m
+7192 8282 _m
+80 _t(____)_S 7592 8282 _m
+7672 8282 _m
+80 _t(____)_S 8072 8282 _m
+8152 8282 _m
+80 _t(_____)_S 80 _t8712 8282 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2708 _m
+_sp 334 2751 1 _pl _s 347 2708 _m
+_sp 347 2751 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2708 _m
+_sp 1674 2751 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2708 _m
+_sp 3434 2751 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2708 _m
+_sp 3754 2751 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2708 _m
+_sp 4074 2751 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2708 _m
+_sp 4447 2751 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2708 _m
+_sp 4767 2751 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2708 _m
+_sp 5087 2751 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2708 _m
+_sp 5407 2751 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2708 _m
+_sp 5828 2751 1 _pl _s 5841 2708 _m
+_sp 5841 2751 1 _pl _s grestore _s grestore 472 8149 _m
+552 8149 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 8149 _m
+2552 8149 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 8149 _m
+5192 8149 _m
+80 _t(____)_S 5592 8149 _m
+5672 8149 _m
+80 _t(____)_S 6072 8149 _m
+6152 8149 _m
+80 _t(_____)_S 6632 8149 _m
+6712 8149 _m
+80 _t(____)_S 7112 8149 _m
+7192 8149 _m
+80 _t(____)_S 7592 8149 _m
+7672 8149 _m
+80 _t(____)_S 8072 8149 _m
+8152 8149 _m
+80 _t(_____)_S 80 _t8712 8149 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2664 _m
+_sp 334 2707 1 _pl _s 347 2664 _m
+_sp 347 2707 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2664 _m
+_sp 1674 2707 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2664 _m
+_sp 3434 2707 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2664 _m
+_sp 3754 2707 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2664 _m
+_sp 4074 2707 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2664 _m
+_sp 4447 2707 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2664 _m
+_sp 4767 2707 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2664 _m
+_sp 5087 2707 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2664 _m
+_sp 5407 2707 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2664 _m
+_sp 5828 2707 1 _pl _s 5841 2664 _m
+_sp 5841 2707 1 _pl _s grestore _s grestore 472 8016 _m
+552 8016 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 8016 _m
+2552 8016 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 8016 _m
+5192 8016 _m
+80 _t(____)_S 5592 8016 _m
+5672 8016 _m
+80 _t(____)_S 6072 8016 _m
+6152 8016 _m
+80 _t(_____)_S 6632 8016 _m
+6712 8016 _m
+80 _t(____)_S 7112 8016 _m
+7192 8016 _m
+80 _t(____)_S 7592 8016 _m
+7672 8016 _m
+80 _t(____)_S 8072 8016 _m
+8152 8016 _m
+80 _t(_____)_S 80 _t8712 8016 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2619 _m
+_sp 334 2662 1 _pl _s 347 2619 _m
+_sp 347 2662 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2619 _m
+_sp 1674 2662 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2619 _m
+_sp 3434 2662 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2619 _m
+_sp 3754 2662 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2619 _m
+_sp 4074 2662 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2619 _m
+_sp 4447 2662 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2619 _m
+_sp 4767 2662 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2619 _m
+_sp 5087 2662 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2619 _m
+_sp 5407 2662 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2619 _m
+_sp 5828 2662 1 _pl _s 5841 2619 _m
+_sp 5841 2662 1 _pl _s grestore _s grestore 472 7883 _m
+552 7883 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 7883 _m
+2552 7883 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 7883 _m
+5192 7883 _m
+80 _t(____)_S 5592 7883 _m
+5672 7883 _m
+80 _t(____)_S 6072 7883 _m
+6152 7883 _m
+80 _t(_____)_S 6632 7883 _m
+6712 7883 _m
+80 _t(____)_S 7112 7883 _m
+7192 7883 _m
+80 _t(____)_S 7592 7883 _m
+7672 7883 _m
+80 _t(____)_S 8072 7883 _m
+8152 7883 _m
+80 _t(_____)_S 80 _t8712 7883 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2575 _m
+_sp 334 2618 1 _pl _s 347 2575 _m
+_sp 347 2618 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2575 _m
+_sp 1674 2618 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2575 _m
+_sp 3434 2618 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2575 _m
+_sp 3754 2618 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2575 _m
+_sp 4074 2618 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2575 _m
+_sp 4447 2618 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2575 _m
+_sp 4767 2618 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2575 _m
+_sp 5087 2618 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2575 _m
+_sp 5407 2618 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2575 _m
+_sp 5828 2618 1 _pl _s 5841 2575 _m
+_sp 5841 2618 1 _pl _s grestore _s grestore 472 7750 _m
+552 7750 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 7750 _m
+2552 7750 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 7750 _m
+5192 7750 _m
+80 _t(____)_S 5592 7750 _m
+5672 7750 _m
+80 _t(____)_S 6072 7750 _m
+6152 7750 _m
+80 _t(_____)_S 6632 7750 _m
+6712 7750 _m
+80 _t(____)_S 7112 7750 _m
+7192 7750 _m
+80 _t(____)_S 7592 7750 _m
+7672 7750 _m
+80 _t(____)_S 8072 7750 _m
+8152 7750 _m
+80 _t(_____)_S 80 _t8712 7750 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2531 _m
+_sp 334 2574 1 _pl _s 347 2531 _m
+_sp 347 2574 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2531 _m
+_sp 1674 2574 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2531 _m
+_sp 3434 2574 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2531 _m
+_sp 3754 2574 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2531 _m
+_sp 4074 2574 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2531 _m
+_sp 4447 2574 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2531 _m
+_sp 4767 2574 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2531 _m
+_sp 5087 2574 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2531 _m
+_sp 5407 2574 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2531 _m
+_sp 5828 2574 1 _pl _s 5841 2531 _m
+_sp 5841 2574 1 _pl _s grestore _s grestore 472 7617 _m
+552 7617 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 7617 _m
+2552 7617 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 7617 _m
+5192 7617 _m
+80 _t(____)_S 5592 7617 _m
+5672 7617 _m
+80 _t(____)_S 6072 7617 _m
+6152 7617 _m
+80 _t(_____)_S 6632 7617 _m
+6712 7617 _m
+80 _t(____)_S 7112 7617 _m
+7192 7617 _m
+80 _t(____)_S 7592 7617 _m
+7672 7617 _m
+80 _t(____)_S 8072 7617 _m
+8152 7617 _m
+80 _t(_____)_S 80 _t8712 7617 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2486 _m
+_sp 334 2529 1 _pl _s 347 2486 _m
+_sp 347 2529 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2486 _m
+_sp 1674 2529 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2486 _m
+_sp 3434 2529 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2486 _m
+_sp 3754 2529 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2486 _m
+_sp 4074 2529 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2486 _m
+_sp 4447 2529 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2486 _m
+_sp 4767 2529 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2486 _m
+_sp 5087 2529 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2486 _m
+_sp 5407 2529 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2486 _m
+_sp 5828 2529 1 _pl _s 5841 2486 _m
+_sp 5841 2529 1 _pl _s grestore _s grestore 472 7484 _m
+552 7484 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 7484 _m
+2552 7484 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 7484 _m
+5192 7484 _m
+80 _t(____)_S 5592 7484 _m
+5672 7484 _m
+80 _t(____)_S 6072 7484 _m
+6152 7484 _m
+80 _t(_____)_S 6632 7484 _m
+6712 7484 _m
+80 _t(____)_S 7112 7484 _m
+7192 7484 _m
+80 _t(____)_S 7592 7484 _m
+7672 7484 _m
+80 _t(____)_S 8072 7484 _m
+8152 7484 _m
+80 _t(_____)_S 80 _t8712 7484 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2442 _m
+_sp 334 2485 1 _pl _s 347 2442 _m
+_sp 347 2485 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2442 _m
+_sp 1674 2485 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2442 _m
+_sp 3434 2485 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2442 _m
+_sp 3754 2485 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2442 _m
+_sp 4074 2485 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2442 _m
+_sp 4447 2485 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2442 _m
+_sp 4767 2485 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2442 _m
+_sp 5087 2485 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2442 _m
+_sp 5407 2485 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2442 _m
+_sp 5828 2485 1 _pl _s 5841 2442 _m
+_sp 5841 2485 1 _pl _s grestore _s grestore 472 7351 _m
+552 7351 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 7351 _m
+2552 7351 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 7351 _m
+5192 7351 _m
+80 _t(____)_S 5592 7351 _m
+5672 7351 _m
+80 _t(____)_S 6072 7351 _m
+6152 7351 _m
+80 _t(_____)_S 6632 7351 _m
+6712 7351 _m
+80 _t(____)_S 7112 7351 _m
+7192 7351 _m
+80 _t(____)_S 7592 7351 _m
+7672 7351 _m
+80 _t(____)_S 8072 7351 _m
+8152 7351 _m
+80 _t(_____)_S 80 _t8712 7351 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2398 _m
+_sp 334 2441 1 _pl _s 347 2398 _m
+_sp 347 2441 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2398 _m
+_sp 1674 2441 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2398 _m
+_sp 3434 2441 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2398 _m
+_sp 3754 2441 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2398 _m
+_sp 4074 2441 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2398 _m
+_sp 4447 2441 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2398 _m
+_sp 4767 2441 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2398 _m
+_sp 5087 2441 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2398 _m
+_sp 5407 2441 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2398 _m
+_sp 5828 2441 1 _pl _s 5841 2398 _m
+_sp 5841 2441 1 _pl _s grestore _s grestore 472 7218 _m
+552 7218 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 7218 _m
+2552 7218 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 7218 _m
+5192 7218 _m
+80 _t(____)_S 5592 7218 _m
+5672 7218 _m
+80 _t(____)_S 6072 7218 _m
+6152 7218 _m
+80 _t(_____)_S 6632 7218 _m
+6712 7218 _m
+80 _t(____)_S 7112 7218 _m
+7192 7218 _m
+80 _t(____)_S 7592 7218 _m
+7672 7218 _m
+80 _t(____)_S 8072 7218 _m
+8152 7218 _m
+80 _t(_____)_S 80 _t8712 7218 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2353 _m
+_sp 334 2396 1 _pl _s 347 2353 _m
+_sp 347 2396 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2353 _m
+_sp 1674 2396 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2353 _m
+_sp 3434 2396 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2353 _m
+_sp 3754 2396 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2353 _m
+_sp 4074 2396 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2353 _m
+_sp 4447 2396 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2353 _m
+_sp 4767 2396 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2353 _m
+_sp 5087 2396 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2353 _m
+_sp 5407 2396 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2353 _m
+_sp 5828 2396 1 _pl _s 5841 2353 _m
+_sp 5841 2396 1 _pl _s grestore _s grestore 472 7085 _m
+552 7085 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 7085 _m
+2552 7085 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 7085 _m
+5192 7085 _m
+80 _t(____)_S 5592 7085 _m
+5672 7085 _m
+80 _t(____)_S 6072 7085 _m
+6152 7085 _m
+80 _t(_____)_S 6632 7085 _m
+6712 7085 _m
+80 _t(____)_S 7112 7085 _m
+7192 7085 _m
+80 _t(____)_S 7592 7085 _m
+7672 7085 _m
+80 _t(____)_S 8072 7085 _m
+8152 7085 _m
+80 _t(_____)_S 80 _t8712 7085 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2309 _m
+_sp 334 2352 1 _pl _s 347 2309 _m
+_sp 347 2352 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2309 _m
+_sp 1674 2352 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2309 _m
+_sp 3434 2352 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2309 _m
+_sp 3754 2352 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2309 _m
+_sp 4074 2352 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2309 _m
+_sp 4447 2352 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2309 _m
+_sp 4767 2352 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2309 _m
+_sp 5087 2352 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2309 _m
+_sp 5407 2352 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2309 _m
+_sp 5828 2352 1 _pl _s 5841 2309 _m
+_sp 5841 2352 1 _pl _s grestore _s grestore 472 6952 _m
+552 6952 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 6952 _m
+2552 6952 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 6952 _m
+5192 6952 _m
+80 _t(____)_S 5592 6952 _m
+5672 6952 _m
+80 _t(____)_S 6072 6952 _m
+6152 6952 _m
+80 _t(_____)_S 6632 6952 _m
+6712 6952 _m
+80 _t(____)_S 7112 6952 _m
+7192 6952 _m
+80 _t(____)_S 7592 6952 _m
+7672 6952 _m
+80 _t(____)_S 8072 6952 _m
+8152 6952 _m
+80 _t(_____)_S 80 _t8712 6952 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2265 _m
+_sp 334 2308 1 _pl _s 347 2265 _m
+_sp 347 2308 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2265 _m
+_sp 1674 2308 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2265 _m
+_sp 3434 2308 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2265 _m
+_sp 3754 2308 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2265 _m
+_sp 4074 2308 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2265 _m
+_sp 4447 2308 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2265 _m
+_sp 4767 2308 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2265 _m
+_sp 5087 2308 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2265 _m
+_sp 5407 2308 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2265 _m
+_sp 5828 2308 1 _pl _s 5841 2265 _m
+_sp 5841 2308 1 _pl _s grestore _s grestore 472 6819 _m
+552 6819 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 6819 _m
+2552 6819 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 6819 _m
+5192 6819 _m
+80 _t(____)_S 5592 6819 _m
+5672 6819 _m
+80 _t(____)_S 6072 6819 _m
+6152 6819 _m
+80 _t(_____)_S 6632 6819 _m
+6712 6819 _m
+80 _t(____)_S 7112 6819 _m
+7192 6819 _m
+80 _t(____)_S 7592 6819 _m
+7672 6819 _m
+80 _t(____)_S 8072 6819 _m
+8152 6819 _m
+80 _t(_____)_S 80 _t8712 6819 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2220 _m
+_sp 334 2263 1 _pl _s 347 2220 _m
+_sp 347 2263 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2220 _m
+_sp 1674 2263 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2220 _m
+_sp 3434 2263 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2220 _m
+_sp 3754 2263 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2220 _m
+_sp 4074 2263 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2220 _m
+_sp 4447 2263 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2220 _m
+_sp 4767 2263 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2220 _m
+_sp 5087 2263 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2220 _m
+_sp 5407 2263 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2220 _m
+_sp 5828 2263 1 _pl _s 5841 2220 _m
+_sp 5841 2263 1 _pl _s grestore _s grestore 472 6686 _m
+552 6686 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 6686 _m
+2552 6686 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 6686 _m
+5192 6686 _m
+80 _t(____)_S 5592 6686 _m
+5672 6686 _m
+80 _t(____)_S 6072 6686 _m
+6152 6686 _m
+80 _t(_____)_S 6632 6686 _m
+6712 6686 _m
+80 _t(____)_S 7112 6686 _m
+7192 6686 _m
+80 _t(____)_S 7592 6686 _m
+7672 6686 _m
+80 _t(____)_S 8072 6686 _m
+8152 6686 _m
+80 _t(_____)_S 80 _t8712 6686 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2176 _m
+_sp 334 2219 1 _pl _s 347 2176 _m
+_sp 347 2219 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2176 _m
+_sp 1674 2219 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2176 _m
+_sp 3434 2219 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2176 _m
+_sp 3754 2219 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2176 _m
+_sp 4074 2219 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2176 _m
+_sp 4447 2219 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2176 _m
+_sp 4767 2219 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2176 _m
+_sp 5087 2219 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2176 _m
+_sp 5407 2219 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2176 _m
+_sp 5828 2219 1 _pl _s 5841 2176 _m
+_sp 5841 2219 1 _pl _s grestore _s grestore 472 6553 _m
+552 6553 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 6553 _m
+2552 6553 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 6553 _m
+5192 6553 _m
+80 _t(____)_S 5592 6553 _m
+5672 6553 _m
+80 _t(____)_S 6072 6553 _m
+6152 6553 _m
+80 _t(_____)_S 6632 6553 _m
+6712 6553 _m
+80 _t(____)_S 7112 6553 _m
+7192 6553 _m
+80 _t(____)_S 7592 6553 _m
+7672 6553 _m
+80 _t(____)_S 8072 6553 _m
+8152 6553 _m
+80 _t(_____)_S 80 _t8712 6553 _m
+gsave 1.5 3 scale gsave 0 0 0 _c _s 334 2132 _m
+_sp 334 2175 1 _pl _s 347 2132 _m
+_sp 347 2175 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1674 2132 _m
+_sp 1674 2175 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3434 2132 _m
+_sp 3434 2175 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3754 2132 _m
+_sp 3754 2175 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4074 2132 _m
+_sp 4074 2175 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4447 2132 _m
+_sp 4447 2175 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4767 2132 _m
+_sp 4767 2175 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5087 2132 _m
+_sp 5087 2175 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5407 2132 _m
+_sp 5407 2175 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5828 2132 _m
+_sp 5828 2175 1 _pl _s 5841 2132 _m
+_sp 5841 2175 1 _pl _s grestore _s grestore 472 6420 _m
+552 6420 _m
+80 _t(________________)_S 160 _t(____)_S 80 _t2472 6420 _m
+2552 6420 _m
+80 _t(OOOOOOOOOO)_S 160 _t(OOOOOOOOOO)_S 240 _t(OOOOO)_S 80 _t5112 6420 _m
+5192 6420 _m
+80 _t(____)_S 5592 6420 _m
+5672 6420 _m
+80 _t(____)_S 6072 6420 _m
+6152 6420 _m
+80 _t(_____)_S 6632 6420 _m
+6712 6420 _m
+80 _t(____)_S 7112 6420 _m
+7192 6420 _m
+80 _t(____)_S 7592 6420 _m
+7672 6420 _m
+80 _t(____)_S 8072 6420 _m
+8152 6420 _m
+80 _t(_____)_S 80 _t8712 6420 _m
+8792 6420 _m
+80 _tgsave 1.5 3 scale gsave 0 0 0 _c _s 366 2112 _m
+_sp 347 2130 347 2112 2 _pl _s 334 2130 _m
+_sp 366 2105 334 2105 2 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 368 2112 _m
+_sp 420 2112 1 _pl _s 368 2105 _m
+_sp 420 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 421 2112 _m
+_sp 473 2112 1 _pl _s 421 2105 _m
+_sp 473 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 474 2112 _m
+_sp 526 2112 1 _pl _s 474 2105 _m
+_sp 526 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 528 2112 _m
+_sp 580 2112 1 _pl _s 528 2105 _m
+_sp 580 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 581 2112 _m
+_sp 633 2112 1 _pl _s 581 2105 _m
+_sp 633 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 634 2112 _m
+_sp 686 2112 1 _pl _s 634 2105 _m
+_sp 686 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 688 2112 _m
+_sp 740 2112 1 _pl _s 688 2105 _m
+_sp 740 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 741 2112 _m
+_sp 793 2112 1 _pl _s 741 2105 _m
+_sp 793 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 794 2112 _m
+_sp 846 2112 1 _pl _s 794 2105 _m
+_sp 846 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 848 2112 _m
+_sp 900 2112 1 _pl _s 848 2105 _m
+_sp 900 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 901 2112 _m
+_sp 953 2112 1 _pl _s 901 2105 _m
+_sp 953 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 954 2112 _m
+_sp 1006 2112 1 _pl _s 954 2105 _m
+_sp 1006 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1008 2112 _m
+_sp 1060 2112 1 _pl _s 1008 2105 _m
+_sp 1060 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1061 2112 _m
+_sp 1113 2112 1 _pl _s 1061 2105 _m
+_sp 1113 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1114 2112 _m
+_sp 1166 2112 1 _pl _s 1114 2105 _m
+_sp 1166 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1168 2112 _m
+_sp 1220 2112 1 _pl _s 1168 2105 _m
+_sp 1220 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1221 2112 _m
+_sp 1273 2112 1 _pl _s 1221 2105 _m
+_sp 1273 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1274 2112 _m
+_sp 1326 2112 1 _pl _s 1274 2105 _m
+_sp 1326 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1328 2112 _m
+_sp 1380 2112 1 _pl _s 1328 2105 _m
+_sp 1380 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1381 2112 _m
+_sp 1433 2112 1 _pl _s 1381 2105 _m
+_sp 1433 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1434 2112 _m
+_sp 1486 2112 1 _pl _s 1434 2105 _m
+_sp 1486 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1488 2112 _m
+_sp 1540 2112 1 _pl _s 1488 2105 _m
+_sp 1540 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1541 2112 _m
+_sp 1593 2112 1 _pl _s 1541 2105 _m
+_sp 1593 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1594 2112 _m
+_sp 1646 2112 1 _pl _s 1594 2105 _m
+_sp 1646 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1648 2105 _m
+_sp 1700 2105 1 _pl _s 1674 2130 _m
+_sp 1674 2112 1 _pl _s 1648 2112 _m
+_sp 1700 2112 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1701 2112 _m
+_sp 1753 2112 1 _pl _s 1701 2105 _m
+_sp 1753 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1754 2112 _m
+_sp 1806 2112 1 _pl _s 1754 2105 _m
+_sp 1806 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1808 2112 _m
+_sp 1860 2112 1 _pl _s 1808 2105 _m
+_sp 1860 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1861 2112 _m
+_sp 1913 2112 1 _pl _s 1861 2105 _m
+_sp 1913 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1914 2112 _m
+_sp 1966 2112 1 _pl _s 1914 2105 _m
+_sp 1966 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 1968 2112 _m
+_sp 2020 2112 1 _pl _s 1968 2105 _m
+_sp 2020 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2021 2112 _m
+_sp 2073 2112 1 _pl _s 2021 2105 _m
+_sp 2073 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2074 2112 _m
+_sp 2126 2112 1 _pl _s 2074 2105 _m
+_sp 2126 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2128 2112 _m
+_sp 2180 2112 1 _pl _s 2128 2105 _m
+_sp 2180 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2181 2112 _m
+_sp 2233 2112 1 _pl _s 2181 2105 _m
+_sp 2233 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2234 2112 _m
+_sp 2286 2112 1 _pl _s 2234 2105 _m
+_sp 2286 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2288 2112 _m
+_sp 2340 2112 1 _pl _s 2288 2105 _m
+_sp 2340 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2341 2112 _m
+_sp 2393 2112 1 _pl _s 2341 2105 _m
+_sp 2393 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2394 2112 _m
+_sp 2446 2112 1 _pl _s 2394 2105 _m
+_sp 2446 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2448 2112 _m
+_sp 2500 2112 1 _pl _s 2448 2105 _m
+_sp 2500 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2501 2112 _m
+_sp 2553 2112 1 _pl _s 2501 2105 _m
+_sp 2553 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2554 2112 _m
+_sp 2606 2112 1 _pl _s 2554 2105 _m
+_sp 2606 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2608 2112 _m
+_sp 2660 2112 1 _pl _s 2608 2105 _m
+_sp 2660 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2661 2112 _m
+_sp 2713 2112 1 _pl _s 2661 2105 _m
+_sp 2713 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2714 2112 _m
+_sp 2766 2112 1 _pl _s 2714 2105 _m
+_sp 2766 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2768 2112 _m
+_sp 2820 2112 1 _pl _s 2768 2105 _m
+_sp 2820 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2821 2112 _m
+_sp 2873 2112 1 _pl _s 2821 2105 _m
+_sp 2873 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2874 2112 _m
+_sp 2926 2112 1 _pl _s 2874 2105 _m
+_sp 2926 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2928 2112 _m
+_sp 2980 2112 1 _pl _s 2928 2105 _m
+_sp 2980 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 2981 2112 _m
+_sp 3033 2112 1 _pl _s 2981 2105 _m
+_sp 3033 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3034 2112 _m
+_sp 3086 2112 1 _pl _s 3034 2105 _m
+_sp 3086 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3088 2112 _m
+_sp 3140 2112 1 _pl _s 3088 2105 _m
+_sp 3140 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3141 2112 _m
+_sp 3193 2112 1 _pl _s 3141 2105 _m
+_sp 3193 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3194 2112 _m
+_sp 3246 2112 1 _pl _s 3194 2105 _m
+_sp 3246 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3248 2112 _m
+_sp 3300 2112 1 _pl _s 3248 2105 _m
+_sp 3300 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3301 2112 _m
+_sp 3353 2112 1 _pl _s 3301 2105 _m
+_sp 3353 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3354 2112 _m
+_sp 3406 2112 1 _pl _s 3354 2105 _m
+_sp 3406 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3408 2105 _m
+_sp 3460 2105 1 _pl _s 3434 2130 _m
+_sp 3434 2112 1 _pl _s 3408 2112 _m
+_sp 3460 2112 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3461 2112 _m
+_sp 3513 2112 1 _pl _s 3461 2105 _m
+_sp 3513 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3514 2112 _m
+_sp 3566 2112 1 _pl _s 3514 2105 _m
+_sp 3566 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3568 2112 _m
+_sp 3620 2112 1 _pl _s 3568 2105 _m
+_sp 3620 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3621 2112 _m
+_sp 3673 2112 1 _pl _s 3621 2105 _m
+_sp 3673 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3674 2112 _m
+_sp 3726 2112 1 _pl _s 3674 2105 _m
+_sp 3726 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3728 2105 _m
+_sp 3780 2105 1 _pl _s 3754 2130 _m
+_sp 3754 2112 1 _pl _s 3728 2112 _m
+_sp 3780 2112 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3781 2112 _m
+_sp 3833 2112 1 _pl _s 3781 2105 _m
+_sp 3833 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3834 2112 _m
+_sp 3886 2112 1 _pl _s 3834 2105 _m
+_sp 3886 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3888 2112 _m
+_sp 3940 2112 1 _pl _s 3888 2105 _m
+_sp 3940 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3941 2112 _m
+_sp 3993 2112 1 _pl _s 3941 2105 _m
+_sp 3993 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 3994 2112 _m
+_sp 4046 2112 1 _pl _s 3994 2105 _m
+_sp 4046 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4048 2105 _m
+_sp 4100 2105 1 _pl _s 4074 2130 _m
+_sp 4074 2112 1 _pl _s 4048 2112 _m
+_sp 4100 2112 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4101 2112 _m
+_sp 4153 2112 1 _pl _s 4101 2105 _m
+_sp 4153 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4154 2112 _m
+_sp 4206 2112 1 _pl _s 4154 2105 _m
+_sp 4206 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4208 2112 _m
+_sp 4260 2112 1 _pl _s 4208 2105 _m
+_sp 4260 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4261 2112 _m
+_sp 4313 2112 1 _pl _s 4261 2105 _m
+_sp 4313 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4314 2112 _m
+_sp 4366 2112 1 _pl _s 4314 2105 _m
+_sp 4366 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4368 2112 _m
+_sp 4420 2112 1 _pl _s 4368 2105 _m
+_sp 4420 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4421 2105 _m
+_sp 4473 2105 1 _pl _s 4447 2130 _m
+_sp 4447 2112 1 _pl _s 4421 2112 _m
+_sp 4473 2112 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4474 2112 _m
+_sp 4526 2112 1 _pl _s 4474 2105 _m
+_sp 4526 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4528 2112 _m
+_sp 4580 2112 1 _pl _s 4528 2105 _m
+_sp 4580 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4581 2112 _m
+_sp 4633 2112 1 _pl _s 4581 2105 _m
+_sp 4633 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4634 2112 _m
+_sp 4686 2112 1 _pl _s 4634 2105 _m
+_sp 4686 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4688 2112 _m
+_sp 4740 2112 1 _pl _s 4688 2105 _m
+_sp 4740 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4741 2105 _m
+_sp 4793 2105 1 _pl _s 4767 2130 _m
+_sp 4767 2112 1 _pl _s 4741 2112 _m
+_sp 4793 2112 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4794 2112 _m
+_sp 4846 2112 1 _pl _s 4794 2105 _m
+_sp 4846 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4848 2112 _m
+_sp 4900 2112 1 _pl _s 4848 2105 _m
+_sp 4900 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4901 2112 _m
+_sp 4953 2112 1 _pl _s 4901 2105 _m
+_sp 4953 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 4954 2112 _m
+_sp 5006 2112 1 _pl _s 4954 2105 _m
+_sp 5006 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5008 2112 _m
+_sp 5060 2112 1 _pl _s 5008 2105 _m
+_sp 5060 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5061 2105 _m
+_sp 5113 2105 1 _pl _s 5087 2130 _m
+_sp 5087 2112 1 _pl _s 5061 2112 _m
+_sp 5113 2112 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5114 2112 _m
+_sp 5166 2112 1 _pl _s 5114 2105 _m
+_sp 5166 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5168 2112 _m
+_sp 5220 2112 1 _pl _s 5168 2105 _m
+_sp 5220 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5221 2112 _m
+_sp 5273 2112 1 _pl _s 5221 2105 _m
+_sp 5273 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5274 2112 _m
+_sp 5326 2112 1 _pl _s 5274 2105 _m
+_sp 5326 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5328 2112 _m
+_sp 5380 2112 1 _pl _s 5328 2105 _m
+_sp 5380 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5381 2105 _m
+_sp 5433 2105 1 _pl _s 5407 2130 _m
+_sp 5407 2112 1 _pl _s 5381 2112 _m
+_sp 5433 2112 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5434 2112 _m
+_sp 5486 2112 1 _pl _s 5434 2105 _m
+_sp 5486 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5488 2112 _m
+_sp 5540 2112 1 _pl _s 5488 2105 _m
+_sp 5540 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5541 2112 _m
+_sp 5593 2112 1 _pl _s 5541 2105 _m
+_sp 5593 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5594 2112 _m
+_sp 5646 2112 1 _pl _s 5594 2105 _m
+_sp 5646 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5648 2112 _m
+_sp 5700 2112 1 _pl _s 5648 2105 _m
+_sp 5700 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5701 2112 _m
+_sp 5753 2112 1 _pl _s 5701 2105 _m
+_sp 5753 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5754 2112 _m
+_sp 5806 2112 1 _pl _s 5754 2105 _m
+_sp 5806 2105 1 _pl _s grestore _s grestore gsave 1.5 3 scale gsave 0 0 0 _c _s 5808 2112 _m
+_sp 5828 2130 5828 2112 2 _pl _s 5841 2130 _m
+_sp 5808 2105 5841 2105 2 _pl _s grestore _s grestore 472 6287 _m
+552 6287 _m
+632 6287 _m
+712 6287 _m
+792 6287 _m
+872 6287 _m
+952 6287 _m
+1032 6287 _m
+1112 6287 _m
+1192 6287 _m
+1272 6287 _m
+1352 6287 _m
+1432 6287 _m
+1512 6287 _m
+1592 6287 _m
+1672 6287 _m
+1752 6287 _m
+1832 6287 _m
+1912 6287 _m
+1992 6287 _m
+2072 6287 _m
+2152 6287 _m
+2232 6287 _m
+2312 6287 _m
+2392 6287 _m
+2472 6287 _m
+2552 6287 _m
+2632 6287 _m
+2712 6287 _m
+2792 6287 _m
+2872 6287 _m
+2952 6287 _m
+3032 6287 _m
+3112 6287 _m
+3192 6287 _m
+3272 6287 _m
+3352 6287 _m
+3432 6287 _m
+3512 6287 _m
+3592 6287 _m
+3672 6287 _m
+3752 6287 _m
+3832 6287 _m
+3912 6287 _m
+3992 6287 _m
+4072 6287 _m
+4152 6287 _m
+4232 6287 _m
+4312 6287 _m
+4392 6287 _m
+4472 6287 _m
+4552 6287 _m
+4632 6287 _m
+4712 6287 _m
+4792 6287 _m
+4872 6287 _m
+4952 6287 _m
+5032 6287 _m
+5112 6287 _m
+5192 6287 _m
+5272 6287 _m
+5352 6287 _m
+5432 6287 _m
+5512 6287 _m
+5592 6287 _m
+5672 6287 _m
+5752 6287 _m
+5832 6287 _m
+5912 6287 _m
+5992 6287 _m
+6072 6287 _m
+6152 6287 _m
+6232 6287 _m
+6312 6287 _m
+6392 6287 _m
+6472 6287 _m
+6552 6287 _m
+6632 6287 _m
+6712 6287 _m
+6792 6287 _m
+6872 6287 _m
+6952 6287 _m
+7032 6287 _m
+7112 6287 _m
+7192 6287 _m
+7272 6287 _m
+7352 6287 _m
+7432 6287 _m
+7512 6287 _m
+7592 6287 _m
+7672 6287 _m
+7752 6287 _m
+7832 6287 _m
+7912 6287 _m
+7992 6287 _m
+8072 6287 _m
+8152 6287 _m
+8232 6287 _m
+8312 6287 _m
+8392 6287 _m
+8472 6287 _m
+8552 6287 _m
+8632 6287 _m
+8712 6287 _m
+8792 6287 _m
+80 _t472 6154 _m
+80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t472 6021 _m
+80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t80 _t472 5888 _m
+80 _t_ep
+_ed end end
+
