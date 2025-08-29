@@ -142,7 +142,7 @@ Install python3 and the following modules. Due I install it on an ubuntu distro,
 
 ### print.py 
 
-`print.py` is the script that helps converting the raw files to pdf files. Support EPSON language, and Poscript files. Also scans the pdf for empty pages, and remove them from the output. Support multi page PDFS.
+`print.py` is the script that helps converting the raw files to pdf files. Support EPSON language, and Postcript files. Also scans the pdf for empty pages, and remove them from the output. Support multi page PDFS.
 
 ```
 usage: print.py [-h] [-v] [-l] [-p] [-g] [-m MODE] input [input ...]
@@ -162,7 +162,7 @@ options:
 - `-v`, `--verbose` show data about file and processing
 - `-l`, `--landscape` select Landscape mode
 - `-p`, `--preserve` preserve data (don't delete the tmp file `/tmp/print_xxxxx` (for debug))
-- `-g`, `--gs` run using Ghostcript to generate PDF (Poscript printing)
+- `-g`, `--gs` run using Ghostcript to generate PDF (Postcript printing)
 - `-m MODE`, `--mode MODE` select mode. If mode is not configured, the script uses `auto` and try to detect the mode based on the name of the file (e.g. `fp_0000.prt` will use `fp` mode.) There are some predefined modes:
     * `A4` (210mm,297mm) standard A4 paper.
     * `folio` (215mm,315mm) old paper size. I use it a lot.
@@ -221,7 +221,7 @@ Done! (1 files processed)
 
 [output file (PDF)](examples/pmmain_000.pdf)
 
-#### Example #1 Print POSCRIPT file from DrawPerfect
+#### Example #1 Print POSTCRIPT file from DrawPerfect
 
 ```
 % ./print.py -v -g ./examples/dr_000.prt
@@ -250,7 +250,7 @@ Also, another, text only postcript file from wordperfect:
 
 
 
-### Example #2 Print POSCRIPT file from WordpPerfect (multiple files)
+### Example #2 Print POSTCRIPT file from WordpPerfect (multiple files)
 
 Sometimes, for complex documents (e.g. with lines) WordPerfect 5.1 creates some files `wp_000x.prt`. The first has the 
 postcript preamble, and the rest has the data. you must concatenate all the files together, and then print it:
@@ -266,6 +266,6 @@ postcript preamble, and the rest has the data. you must concatenate all the file
 
 ### TIPS
 
-* For Poscript printer, use `Xerox 4219/MRP (PS)` (e.g. wordperfect 5.1).
+* For Postcript printer, use `Xerox 4219/MRP (PS)` (e.g. wordperfect 5.1).
 * Always config the printer as `LPT1:` port.
 * For EPSON printers, use `EPSON FX/80 or FX/85`
