@@ -221,7 +221,7 @@ Done! (1 files processed)
 
 [output file (PDF)](examples/pmmain_000.pdf)
 
-#### Example #1 Print POSTCRIPT file from DrawPerfect
+#### Example #2 Print POSTCRIPT file from DrawPerfect
 
 ```
 % ./print.py -v -g ./examples/dr_000.prt
@@ -250,7 +250,7 @@ Also, another, text only postcript file from wordperfect:
 
 
 
-### Example #2 Print POSTCRIPT file from WordpPerfect (multiple files)
+### Example #3 Print POSTCRIPT file from WordpPerfect (multiple files)
 
 Sometimes, for complex documents (e.g. with lines) WordPerfect 5.1 creates some files `wp_000x.prt`. The first has the 
 postcript preamble, and the rest has the data. you must concatenate all the files together, and then print it:
